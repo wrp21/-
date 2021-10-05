@@ -1,36 +1,55 @@
 
 import React, {useState} from "react";
+import { FormContainer,StyledForm,UserInput } from "../Styled/Styled";
+import Button from 'react-bootstrap/Button';
+
 
 const Login = ({history}) => {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
 
-
-    const onSubmitLoginInfo = async (e) => {
-        e.preventDefault();
-
+    const onIdHandler = (event) =>{
+        setId(event.target.value);
     }
 
-    const handleOnChangeUserId= (e) => {
-        setId(e.target.value);
+    const onPasswordHandler = (event)=>{
+        setPassword(event.target.value);
     }
 
-    const handleOnChangeUserPassword = (e) => {
-        setPassword(e.target.value);
-        
-    }
+    const onClickLogin = () =>{
+        console.log('click login');
+        console.log('ID:',id);
+        console.log("PW",password);
 
-    return (
-        <div className="login">
-            <p>Login</p>
-            <input type="text" name="user_id" placeholder="id" id="login-id" onChange={handleOnChangeUserId}></input>  
-            <input type="password" name="user_password" placeholder="password" id="loginpage-password-input" onChange={handleOnChangeUserPassword} ></input>
-            <button type="button" id="login" onClick={onSubmitLoginInfo}>로그인</button>
-            <button type="button" onClick={() => {history.push("/Register");}}>회원가입</button>
-        </div>
+        // 서버 통신
+        /*
+            1. post로 아이디/ 비밀번호 체크
+             
+            2. 로그인 성공하면 메인페이지로 이동
             
-    
-    );
+        */
+
+        // 성공하면 메인 페이지 이동
+
+
+    }
+
+
+    return(
+        <FormContainer>
+            <StyledForm>
+                
+                <label>ID</label>
+                <UserInput type="id" value={id} onChange={onIdHandler} required/>
+                <label>Password</label>
+                <UserInput type="password" value={password} onChange={onPasswordHandler} required/>
+                
+                <br/>
+ 
+                <Button onClick={onClickLogin} disabled={(id==='' || password ==='')}>로그인</Button>
+            </StyledForm>
+        </FormContainer>
+    )
 }
 
 export default Login;
