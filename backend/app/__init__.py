@@ -13,6 +13,8 @@ def create_app():
     app = Flask(__name__, static_folder="statics/images")
     app.config.from_object(Config)
     
+    from . import models
+
     db.init_app(app)
     migrate.init_app(app, db)
     bcrypt.init_app(app)
@@ -22,9 +24,8 @@ def create_app():
     return app
 
 def register_blueprints(app):
-    #from app.api import __
+    from app.api.analysis import analysis
     #from app.api import __
 
+    app.register_blueprint(analysis, url_prefix="/api")
     #app.register_blueprint(__, url_prefix="/api")
-    #app.register_blueprint(__, url_prefix="/api")
-    pass
