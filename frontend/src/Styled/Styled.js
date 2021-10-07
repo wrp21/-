@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+
+
 export const FormContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -82,4 +84,21 @@ export const Section = styled.section`
     padding: 10px 20px 20px 20px;
 
     background-color: yellow;
+`;
+
+
+
+
+export const SelectMultiple = styled.select`
+    border: 3px solid blue;
+    width:300px;
+    box-sizing:border-box;
+    border-radius:15px;
+    
+`;
+
+export const StyledSpan = styled.span`
+    font-size:10px;
+    text-align: center;
+
 `;
