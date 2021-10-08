@@ -4,4 +4,4 @@ statics/
 venv/
 
 # csvfile
-dataAnalysis/mydata.csv
+*.csv
