@@ -29,6 +29,8 @@ const Login = ({history}) => {
         }
         catch(error){
             window.alert(error);
+
+            history.push("/");
         }
       
     };

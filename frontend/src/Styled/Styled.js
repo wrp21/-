@@ -83,7 +83,7 @@ export const Section = styled.section`
     height:80vh;
     padding: 10px 20px 20px 20px;
 
-    background-color: yellow;
+    background-color: lightgray;
 `;
 
 
