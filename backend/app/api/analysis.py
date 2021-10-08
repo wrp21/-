@@ -19,9 +19,10 @@ def get_analysis_result():
     region = request.args.get("region")
     category = request.args.get("category")
 
+    df = pd.read_sql_table('closed_group', conn)
+
+    # 업종-지역 둘 다 입력한 경우
     if region and category:
-        df = pd.read_sql_table('closed_group', conn)
-        
         df = df[df['지역(구)'] == region]
 
         x_series = df['폐업연월']
@@ -36,8 +37,10 @@ def get_analysis_result():
         
         return jsonify(ret), 200
 
+    # 지역만 입력한 경우
     elif region:
         pass
 
+    # 업종만 입력한 경우
     elif category:
         pass
