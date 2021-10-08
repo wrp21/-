@@ -70,8 +70,8 @@ const Survey = ({history, location}) => {
         
 
         await axios({
-            method: 'get',                                 // 수정 필요 => 'get'
-            url: 'http://172.30.1.41:5000/api/result',    // 수정 필요
+            method: 'get', 
+            url: '/api/result',
             params: {region: regionRef.current.options[regionRef.current.selectedIndex].text, category: categoryRef.current.options[categoryRef.current.selectedIndex].text},
             headers: {'Content-Type': 'application/json'},
         })
