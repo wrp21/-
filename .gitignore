@@ -3,5 +3,5 @@ __pycache__/
 statics/
 venv/
 
-# csvfile
-*.csv
+# csvs
+csvdatas/
