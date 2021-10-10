@@ -5,3 +5,4 @@ venv/
 
 # csvs
 csvdatas/
+*.xlsx
