@@ -13,6 +13,19 @@ db_address = "mysql+pymysql://{0}:{1}@127.0.0.1:3306/{2}".format(id, pw, db_name
 db_connection = create_engine(db_address)
 conn = db_connection.connect()
 
+@analysis.route("/Main", methods = ["GET"])
+def main_analysis_result():
+    whole = pd.read_sql_table('whole', conn)
+
+    x_axis = whole['날짜'].tolist()
+    y_axis = whole['건수'].tolist()
+
+    ret = {}
+    for idx, value in enumerate(x_axis):
+        ret[value] = y_axis[idx]
+
+    return jsonify(ret), 200
+
 @analysis.route("/result", methods=["GET"])
 def get_analysis_result():
     '''
@@ -45,3 +58,4 @@ def get_analysis_result():
 
     elif category:
         pass
+
