@@ -1,6 +1,7 @@
 import React from "react";
 import { FormContainer, LoadingMsg} from "../Styled/Styled";
 
+
 const Loading = ({history}) => {
 
     return (
