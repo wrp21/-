@@ -12,15 +12,23 @@ def add_to_db():
     df = pd.read_csv('../dataAnalysis/closed_group.csv', encoding='cp949')
     df.to_sql(name="closed_group", con=db_connection, if_exists='replace', index=False)
 
+    # 전체 기간의 지역별 폐업 점포 수 데이터를 테이블에 추가
+    time_count = pd.read_csv('../dataAnalysis/whole.csv', encoding='cp949')
+    time_count.to_sql(name = 'whole', con = db_connection, if_exists='replace', index = False)
+
     # 전체 기간의 시간 - 건수 데이터를 whole 테이블에 추가
     time_count = pd.read_csv('../dataAnalysis/whole.csv', encoding='cp949')
     time_count.to_sql(name = 'whole', con = db_connection, if_exists='replace', index = False)
 
-    # 코로나 전후로 구분된 지역별 폐업건수 데이터를 past_present_count 테이블에 추가
-    past_present_count = pd.read_csv('../dataAnalysis/past_present_count.csv', encoding = 'cp949')
-    past_present_count.to_sql(name = 'past_present_count', con = db_connection, if_exists = 'replace', index = False)
+    # 정규화된 개업 중 점포 수 데이터를 opening_normalized 테이블에 추가
+    opening_normalized = pd.read_csv('../dataAnalysis/opening_normalized.csv', encoding = 'cp949')
+    opening_normalized.to_sql(name = 'opening_normalized', con = db_connection, if_exists = 'replace', index = False)
 
-    # 지역구별 개업중인 점포 수 데이터를 opening_group 테이블에 추가
-    opening_group = pd.read_csv('../dataAnalysis/opening_group.csv', encoding = 'cp949')
-    opening_group.to_sql(name = 'opening_group', con = db_connection, if_exists = 'replace', index = False)
+    # 정규화된 코로나 이전 폐업 점포 수 데이터를 past_closed_normalized 테이블에 추가
+    past_closed_normalized = pd.read_csv('../dataAnalysis/past_closed_normalized.csv', encoding = 'cp949')
+    past_closed_normalized.to_sql(name = 'opening_group', con = db_connection, if_exists = 'replace', index = False)
+
+    # 정규화된 코로나 이후 폐업 점포 수 데이터를 present_closed_normalized 테이블에 추가
+    present_closed_normalized = pd.read_csv('../dataAnalysis/present_closed_normalized.csv', encoding = 'cp949')
+    present_closed_normalized.to_sql(name = 'present_closed_normalized', con = db_connection, if_exists = 'replace', index = False)
 add_to_db()

@@ -6,3 +6,4 @@ venv/
 # csvs
 csvdatas/
 .ipynb_checkpoints/
+analysisdatas/
