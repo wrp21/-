@@ -1,4 +1,103 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+////// App.js : 상단 내비게이션 헤더 디자인 BEGIN //////////////
+export const StyledAppDiv = styled.div`
+    box-sizing:0;
+    margin:0;
+    display:flex;
+    /* font-family:"consolas"; */
+`;
+
+export const StyledAppRouterDomLink = styled(Link)`
+    text-decoration:none;
+    color: azure;
+`;
+
+export const StyledAppHeader = styled.header`
+    background-color:#333;
+    height:60px;
+    position:fixed;
+    top:0;
+    transition: top 0.1s ease-in-out;
+    width: 100%;
+`;
+
+export const StyledAppNav = styled.nav`
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    top:0;
+    padding: 8px 12px;
+    height: 55px;
+
+`;
+
+export const StyledAppNavLogo = styled.div`
+    font-size:20px;
+    color:azure;
+    list-style:none;
+`;
+
+export const StyledAppNavMenuUl = styled.ul`
+    display: flex;
+    list-style: none; /* ul에서 점을 없애줌*/
+    padding-left: 0;
+    margin:0;
+    padding:0;
+`;
+
+export const StyledAppNavMenuLi = styled.li`
+    padding: 8px 12px;
+    background-color:#333;
+
+    &:hover {
+        background-color: #bd2f2f;
+        border-radius:4px;
+    }
+`;
+
+export const StyledAppNavToggleBtn = styled.a`
+    
+    display: none;
+    /* position: fixed; */
+    position: absolute;
+    right: 32px;
+    font-size: 24px;
+    color: #bd2f2f;
+`;
+
+// .nav-up {
+//     top: -60px;
+// }
+
+////// App.js : 상단 내비게이션 헤더 디자인 END //////////////
+
+
+////// Main.js : 소개 페이지 디자인 BEGIN //////////////
+export const StyledMainDiv = styled.div`
+    width:auto;
+    height:auto;
+    /* height:50px; */
+`;
+
+export const Styledblank = styled.div`
+    width:auto;
+    height:60px;
+`;
+
+export const StyledMent = styled.div`
+    display:block;
+    width:auto;
+    height:auto;
+    background-color:greenyellow;
+    text-align:center;
+`;
+
+
+
+////// Main.js : 소개 페이지 디자인 END //////////////
 
 
 
