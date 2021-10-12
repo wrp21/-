@@ -2,7 +2,7 @@ from flask import request, Blueprint, jsonify, abort
 
 from app import db, bcrypt
 from app.models import User, History
-from authManager import create_access_token, create_refresh_token, jwt_required
+from app.authManager import create_access_token, create_refresh_token, jwt_required
 
 
 auth = Blueprint('auth', __name__, url_prefix="/api")
