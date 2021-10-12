@@ -2,6 +2,7 @@
 import React, {useState} from "react";
 import { FormContainer,StyledForm,UserInput } from "../Styled/Styled";
 import Button from 'react-bootstrap/Button';
+import { fetchLogin } from "./service";
 
 
 const Login = ({history}) => {
@@ -16,23 +17,23 @@ const Login = ({history}) => {
         setPassword(event.target.value);
     }
 
-    const onClickLogin = () =>{
+    const onClickLogin = async() =>{
         console.log('click login');
         console.log('ID:',id);
         console.log("PW",password);
 
-        // 서버 통신
-        /*
-            1. post로 아이디/ 비밀번호 체크
-             
-            2. 로그인 성공하면 메인페이지로 이동
-            
-        */
+        try{
+            const user = await fetchLogin({id,password});
 
-        // 성공하면 메인 페이지 이동
+            history.push('/');
+        }
+        catch(error){
+            window.alert(error);
 
-
-    }
+            history.push("/");
+        }
+      
+    };
 
 
     return(

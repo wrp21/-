@@ -3,6 +3,9 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Main from './components/Main';
 import Survey from './components/Survey';
+import Result from './components/Result';
+import Loading from './components/Loading';
+
 
 import {Link, Route} from 'react-router-dom';
 
@@ -39,6 +42,8 @@ function App() {
           <Route path="/Survey" component={Survey} exact />
           <Route path="/login" component={Login} exact />
           <Route path="/Register" component={Register} exact />
+          <Route path="/Loading" component={Loading} exact />
+          <Route path='/Result' component={Result} exact/>
       </div>
     </div>
   );

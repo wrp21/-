@@ -5,3 +5,7 @@ venv/
 
 # frontend
 node_modules/
+
+# csvs
+csvdatas/
+.ipynb_checkpoints/
