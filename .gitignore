@@ -9,3 +9,4 @@ node_modules/
 # csvs
 csvdatas/
 .ipynb_checkpoints/
+analysisdatas/
