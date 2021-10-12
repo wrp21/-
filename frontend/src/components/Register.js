@@ -14,6 +14,7 @@ yarn add styled-components
 yarn add react-bootstrap
 yarn add bootstrap
 yarn add react-chartjs-2 chart.js
+yarn add react-icons
 
 기능
 1. 아이디(email) 패스워드 입력, 전송

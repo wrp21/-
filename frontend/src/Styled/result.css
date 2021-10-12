@@ -4,6 +4,7 @@
 }
 
 #MainContainer{
+
     border-style: solid;
     border-radius: 30px;
     width:80%;
@@ -12,6 +13,7 @@
 }
 
 #MainContainerHead{
+    
     display:flex;
     padding:20px;
 }
