@@ -36,8 +36,8 @@ export const LineChart = (props)=>{
     };
 
     return(
-        <div style={{width:400}}>
-            <Line data={data} option={options} height={300}></Line>
+        <div style={{width:'80%', height:300}}>
+            <Line data={data} option={options}></Line>
         </div>
     );
 }

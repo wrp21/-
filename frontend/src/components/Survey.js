@@ -33,6 +33,14 @@ const Survey = ({history, location}) => {
         return lst;
     }
 
+    const spreadListH1 = (props) => {
+        const lst = props.map((string) => {
+            return <h1 key={string}>{string}</h1>
+        });
+
+        return lst;
+    }
+
     const [categoryValue, setCategoryValue] = useState("");
     const [regionValue, setRegionValue] = useState("");
     const [categoryMsg, setCategoryMsg] = useState("");
@@ -70,8 +78,9 @@ const Survey = ({history, location}) => {
         
 
         await axios({
-            method: 'get', 
-            url: '/api/result',
+            method: 'get',                                 // 수정 필요 => 'get'
+
+            url: 'http://172.22.56.190:5000/api/result',    // 수정 필요
             params: {region: regionRef.current.options[regionRef.current.selectedIndex].text, category: categoryRef.current.options[categoryRef.current.selectedIndex].text},
             headers: {'Content-Type': 'application/json'},
         })

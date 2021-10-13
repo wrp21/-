@@ -29,14 +29,15 @@ export const BarChart=(props)=>{
         datasets:[
             {
                 borderWidth:1,
-                data: list.data[1]
+                data: list.data[1],
+                backgroundColor:'rgb(75,192,192)'
             }
         ]
     };
 
     return(
-       <div style={{width:400}}>
-           <Bar data={data} options={options} height={300}></Bar>
+       <div style={{width:450, height:300,float:'left'}}>
+           <Bar data={data} options={options}></Bar>
        </div>
     );
 }
