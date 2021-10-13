@@ -66,6 +66,7 @@ const Survey = ({history, location}) => {
         
         history.push("/Loading");
 
+
         // 테스트를 위한 axios
         
 
