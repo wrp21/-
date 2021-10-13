@@ -6,7 +6,13 @@ from sqlalchemy import create_engine
 
 analysis = Blueprint('analysis', __name__, url_prefix="/api")
 
-db_connection = create_engine(os.getenv("SQLALCHEMY_DATABASE_URI"))
+id = "testuser"
+pw = "Enwns1989!"
+db_name = "data_analysis_project"
+
+db_address = "mysql+pymysql://{0}:{1}@127.0.0.1:3306/{2}".format(id, pw, db_name)
+
+db_connection = create_engine(db_address)
 conn = db_connection.connect()
 
 @analysis.route("/result", methods=["GET"])
