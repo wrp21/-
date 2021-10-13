@@ -36,7 +36,7 @@ export const BarChart=(props)=>{
     };
 
     return(
-       <div style={{width:450, height:300,float:'left'}}>
+       <div>
            <Bar data={data} options={options}></Bar>
        </div>
     );

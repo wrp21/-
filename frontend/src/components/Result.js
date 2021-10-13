@@ -41,6 +41,7 @@ const Result = ({history})=>{
     const toggleDiv1=()=>{
 
         const div = document.getElementById('category');
+        
 
         if(div.style.display === 'none'){
             div.style.display='block';
@@ -48,6 +49,7 @@ const Result = ({history})=>{
         else{
             div.style.display = 'none';
         }
+        
 
         
         scrollDown();
@@ -58,13 +60,15 @@ const Result = ({history})=>{
 
 
         const div = document.getElementById('region');
-
+        
         if(div.style.display === 'none'){
             div.style.display='block';
         }
         else{
             div.style.display = 'none';
         }
+        
+
 
         scrollDown()
     }
@@ -75,13 +79,14 @@ const Result = ({history})=>{
     };
 
 
+    let LineChart;
     // 라인 차트 그리기
     const buildChart = () =>{
         var ctx = document.getElementById("LineChart").getContext("2d");
 
-        //if(typeof LineChart !== 'undefined') LineChart.destroy();
+        if(typeof LineChart !== 'undefined') LineChart.destroy();
 
-        let LineChart = new Chart(ctx,{
+        LineChart = new Chart(ctx,{
             type:'line',
             data:{
                 labels:closeDate,
@@ -151,28 +156,29 @@ const Result = ({history})=>{
                     <canvas id="MyBarChart"></canvas>
                 </div>
 
-                <footer>
-                    <div>
-                        <Button onClick={toggleDiv1} style={{paddingRight:"10px", backgroundColor:'rgb(75,192,192)'}}>추천업종 보러가기</Button>
-                        <Button onClick={toggleDiv2} style={{paddingLeft:"10px",backgroundColor:'rgb(75,192,192)'}}>추천지역 보러가기</Button>
-
-                        <div id='recommend'>
-                            <div id='category'>
-                                <h3>{userSelect[1]} 추천 업종입니다.</h3>
-                                <BarChart data={[closeDate,closeCount]}></BarChart>
-                            
-                            </div>
-                            <div id='region'>
-                                <h3>{userSelect[0]} 추천 지역입니다.</h3>
-                                <BarChart data={[closeDate,closeCount]}></BarChart>
-                            
-                            </div>
-                        </div>
-
-                        
+                
+                <div id="BottomContainer">
+                    <div id="ButtonContainer">
+                        <Button onClick={toggleDiv1} style={{paddingRight:"10px", backgroundColor:'rgb(75,192,  192)'}}>추천업종 보러가기</Button>
+                        <Button onClick={toggleDiv2} style={{paddingLeft:"10px",backgroundColor:'rgb(75,192,192)    '}}>추천지역 보러가기</Button>
                     </div>
+                    
+
+                    <div id='recommend'>
+                        <div id='category'>
+                            <h3>{userSelect[1]} 추천 업종입니다.</h3>
+                            <BarChart data={[closeDate,closeCount]} ></BarChart>
+                            
+                        </div>
+                        <div id='region'>
+                            <h3>{userSelect[0]} 추천 지역입니다.</h3>
+                            <BarChart data={[closeDate,closeCount]}></BarChart>
+                            
+                        </div>
+                    </div>       
+                </div>
                    
-                </footer>
+                
 
             </div>
         </div>

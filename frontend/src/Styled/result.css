@@ -10,6 +10,8 @@
     width:80%;
     height:1000px;
     margin:20px auto;
+
+    
 }
 
 #MainContainerHead{
@@ -37,19 +39,29 @@
     padding-top:20px;
 }
 
-footer{
+#BottomContainer{
+    display:block;
+    justify-content: center;
+    align-items: center;
+}
+
+#ButtonContainer{
     text-align: center;
-
-    clear:left;
-	width:100%;
-	height:50px;
-
     
 }
 
 #recommend{
-    display:flex;
+    display:block;
     justify-content: center;
     flex-direction: column;
 
-}    
+}  
+
+#category{
+    text-align: center;
+   
+}
+
+#region{
+    text-align: center;
+}
