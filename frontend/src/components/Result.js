@@ -3,7 +3,7 @@ import React, { useEffect,useState } from 'react';
 import { useLocation } from "react-router";
 //////////////////////////////////////////////////////////
 import Button from 'react-bootstrap/Button';
-import {Footer,MainContainer,Section} from '../Styled/Styled';
+import {Footer,MainContainer,Section, StyledSpace, StyledFlexDiv, StyledFooter,} from '../Styled/Styled';
 import { BarChart } from './BarChart';
 
 
@@ -121,6 +121,9 @@ const Result = ({history})=>{
     
     return(
         <div>
+
+            
+
             
             <div id="MainContainer">
                 <div id="MainContainerHead">

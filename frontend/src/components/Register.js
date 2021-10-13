@@ -3,7 +3,7 @@ import axios from "axios";
 import {useState, useRef} from "react";
 import styled from "styled-components";
 
-import {UserInput, StyledForm, FormContainer, StyledSpan} from '../Styled/Styled';
+import {UserInput, StyledForm, FormContainer, StyledSpan ,StyledFlexDiv, StyledFooter,} from '../Styled/Styled';
 import Button from 'react-bootstrap/Button';
 
 /* 회원가입 컴포넌트 Register
@@ -293,6 +293,12 @@ const Register = ({history}) => {
 
 
             </FormContainer>
+
+            <StyledFlexDiv>
+                <StyledFooter>
+                    Footer
+                </StyledFooter>
+            </StyledFlexDiv>
         </div>
         
     );
