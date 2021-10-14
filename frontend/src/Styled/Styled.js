@@ -27,8 +27,9 @@ export const StyledAppHeader = styled.header`
     position:fixed;
     top:0;
     box-shadow: 0px 3px 3px 0px rgb(0 0 0 / 33%);
-    transition: top 0.1s ease-in-out;
+    /* transition: top 0.1s ease-in-out; */
     width: 100%;
+    z-index:1;
 `;
 
 export const StyledAppNav = styled.nav`
@@ -39,6 +40,7 @@ export const StyledAppNav = styled.nav`
     top:0;
     padding: 8px 12px;
     height: 55px;
+    
 
 `;
 
@@ -130,22 +132,42 @@ export const StyledLayoutFooter = styled.div`
 
 export const StyledFlexDiv = styled.div`
     display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    width:100%;
+    
 `;
+
 export const StyledFooter = styled.footer`
-    display:inline-block;
-    /* position:absolute; */
+    /* display:inline-block;
+    justify-content:center;
+    align-items:center;
     left:0;
     bottom:0;
     right:0;
     width:100%;
-    /* width:100%;
-    left:0px;
-    bottom:0px;
-    height:60px; */
     background-color:#2C2C32;
     color:azure;
     padding-top: 25px;
+    padding-bottom: 25px; */
+
+    padding-top: 25px;
     padding-bottom: 25px;
+
+    display: flex;
+    width: 100%;
+    height:60px;
+    bottom:0px;
+    position:absolute;
+    align-items:center;
+    justify-content:center;
+
+    background-color:#2C2C32;
+    color:azure;
+
+
+
     
 `;
 
@@ -188,7 +210,7 @@ export const StyledIntroUl = styled.a`
 `;
 
 export const StyledIntroDiv = styled.a`
-    padding: 70px 70px;
+    padding: 90px 90px;
     text-decoration:none;
     color:#444;
 
@@ -200,28 +222,61 @@ export const StyledIntroDiv = styled.a`
         /* background-color: #e7e7e7;  Gray  
         background-color: #555555; Black   */
 
-        background-color:#f44336;
+        background-color:#f44336; 
+        
         color:beige;
     }
 `;
 
-export const StyledIntroMenu = styled.div`
+export const StyledIntroMenuCategory = styled.div`
     padding-top:60px;
     padding-bottom:60px;
     background-color:#F5F5F5;
     height:40vh;
+    
+
+    &:hover {
+        background-color: #f44336;
+        /* background-color: green; */
+        /* background-color:orange; */
+        color:azure;
+        
+        transition : 0.5s;
+    }
 `;
 
-export const StyledIntroMenuWhite = styled.div`
+export const StyledIntroMenuRegion = styled.div`
     padding-top:60px;
     padding-bottom:60px;
     height:40vh;
+
+    &:hover {
+        background-color: #008CBA;
+        color:beige;
+        transition : 0.5s;
+    }
+`;
+
+export const StyledIntroMenuBoth = styled.div`
+    padding-top:60px;
+    padding-bottom:60px;
+    background-color:#F5F5F5;
+    height:40vh;
+    
+
+    &:hover {
+        /* background-color: #f44336; */
+        background-color: green;
+        /* background-color:orange; */
+        color:azure;
+        
+        transition : 0.5s;
+    }
 `;
 
 export const Styledblank = styled.div`
     /* width:auto; */
     align-items:center;
-    
     height:60px;
 `;
 
@@ -250,7 +305,6 @@ export const StyledMent = styled.div`
     /* background-color:greenyellow; */
     text-align:center;
 `;
-
 
 
 ////// Main.js : 소개 페이지 디자인 END //////////////
