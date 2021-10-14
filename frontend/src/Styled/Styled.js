@@ -27,8 +27,9 @@ export const StyledAppHeader = styled.header`
     position:fixed;
     top:0;
     box-shadow: 0px 3px 3px 0px rgb(0 0 0 / 33%);
-    transition: top 0.1s ease-in-out;
+    /* transition: top 0.1s ease-in-out; */
     width: 100%;
+    z-index:1;
 `;
 
 export const StyledAppNav = styled.nav`
@@ -39,6 +40,7 @@ export const StyledAppNav = styled.nav`
     top:0;
     padding: 8px 12px;
     height: 55px;
+    
 
 `;
 
