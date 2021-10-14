@@ -5,11 +5,12 @@
 
 #MainContainer{
 
+    
     border-style: solid;
     border-radius: 30px;
     width:80%;
-    height:1000px;
-    margin:20px auto;
+    height: 740px;
+    margin:70px auto;
 
     
 }
@@ -32,6 +33,10 @@
 	padding:10px;	
     border:1px solid #ccc;
 
+    margin-bottom: 20px;
+
+    
+
 }
 #Description{
     clear:left;
@@ -40,13 +45,25 @@
 }
 
 #BottomContainer{
-    display:block;
+    display:inline;
     justify-content: center;
     align-items: center;
+
+    position: relative;
 }
 
 #ButtonContainer{
     text-align: center;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+
+    
+    
+
+    
     
 }
 

@@ -28,6 +28,7 @@ export const BarChart=(props)=>{
         labels: list.data[0],
         datasets:[
             {
+                label:'페업건수',
                 borderWidth:1,
                 data: list.data[1],
                 backgroundColor:'rgb(75,192,192)'

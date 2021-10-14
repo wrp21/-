@@ -22,15 +22,63 @@ const Result = ({history})=>{
 
     const userSelect = location.state.userSelect;
     console.log('데이터 확인',data);
+
+
+
+    console.log("코로나 이후 데이터",data['post-covid']);
+    console.log("코로나 이전 데이터",data['pre-covid']);
+
+
     console.log('지역/업종',userSelect);
 ///////////////////////////////////////////////////////////////////////////
 
-    const closeDate = Object.keys(data);
-    const closeCount = Object.values(data);
+    let closeDate;
+    let closeCount;
+    let preCovid;
+    let category;
+    let region;
+
+    let postCovid;
+
+
+
+    //userSelect[0]:업종
+    if(userSelect[0] ==='미정'|| userSelect[0] === ''){
+        category = Object.keys(data['post-covid']);
+
+        preCovid = Object.values(data['pre-covid']);
+        postCovid = Object.values(data['post-covid']);
+
+
+    }
+
+    //userSelect[1]: 지역
+    else if(userSelect[1] === '미정' || userSelect[1] ==='' ){
+        region = Object.keys(data['post-covid']);
+
+        preCovid = Object.values(data['pre-covid']);
+        postCovid = Object.values(data['post-covid']);
+
+    }
+    else{
+        closeDate = Object.keys(data);
+        closeCount = Object.values(data);
+    }
+
+    console.log("======데이터 확인 =======")
+    console.log("지역 확인",region);
+    console.log("업종 확인",category);
+    console.log('코로나 이전',preCovid);
+    console.log('코로나 이후',postCovid);
+
+    console.log("폐업연월",closeDate);
+    console.log("폐업건수",closeCount);
+
+    
 
     useEffect(()=>{
         //buildBarChart();
-        buildChart();
+        //buildChart();
     },[])
     
 
@@ -42,7 +90,6 @@ const Result = ({history})=>{
 
         const div = document.getElementById('category');
         
-
         if(div.style.display === 'none'){
             div.style.display='block';
         }
@@ -50,14 +97,11 @@ const Result = ({history})=>{
             div.style.display = 'none';
         }
         
-
-        
         scrollDown();
     }
 
     //지역
     const toggleDiv2=()=>{
-
 
         const div = document.getElementById('region');
         
@@ -67,8 +111,6 @@ const Result = ({history})=>{
         else{
             div.style.display = 'none';
         }
-        
-
 
         scrollDown()
     }
@@ -79,8 +121,10 @@ const Result = ({history})=>{
     };
 
 
-    let LineChart;
-    // 라인 차트 그리기
+    //let LineChart;
+    // 라인 차트 그리기-> 업종/지역 모두 선택했을 때만
+
+    /*
     const buildChart = () =>{
         var ctx = document.getElementById("LineChart").getContext("2d");
 
@@ -132,35 +176,47 @@ const Result = ({history})=>{
                     <h3><strong>{userSelect[1]}</strong> 지역 <strong>{userSelect[0]}</strong> 업종 폐업정보 </h3>
                 </div>
 
-                <div id="GraphContainer">
-                    <p>코로나 이전</p>
-                    <BarChart data={[closeDate,closeCount]}></BarChart> 
-                </div>
+                {(userSelect[0] === '미정' || userSelect[0]==='')&&
+                    <div>
+                        <div id="GraphContainer">
+                            <p>코로나 이전</p>
+                            <BarChart data={[category,preCovid]}></BarChart> 
+                        </div>
+                        <div id="GraphContainer">
+                            <p>코로나 이후</p>
+                            <BarChart data={[category,postCovid]}></BarChart> 
+                        </div>
+                    </div>
+                }
 
-                <div id="GraphContainer">
-                    <p>코로나 이후</p>
-                    <BarChart data={[closeDate,closeCount]}></BarChart> 
-                </div>
+                {(userSelect[1] ==='미정' || userSelect[1]==='')&&
+                    <div>
+                        <div id="GraphContainer">
+                            <p>코로나 이전</p>
+                            <BarChart data={[region,preCovid]}></BarChart> 
+                        </div>
+                        <div id="GraphContainer">
+                            <p>코로나 이후</p>
+                            <BarChart data={[region,postCovid]}></BarChart> 
+                        </div>
+                    </div>
+                }
+
+                {closeDate !== undefined &&
+                    <div id="GraphContainer">
+                        
+                        <LineChart data={[closeDate,closeCount]}></LineChart>
+                    </div>
+                }
 
 
-
-                <div id="MainContainerHead">
-                    <h3><strong>{userSelect[1]}</strong> 지역 <strong>{userSelect[0]}</strong> 업종 폐업 추이 </h3>
-                </div>
-
-                <div>
-                    <canvas id="LineChart" width="1000" height="400"/>
-                </div>
-
-                <div>
-                    <canvas id="MyBarChart"></canvas>
-                </div>
+    
 
                 
                 <div id="BottomContainer">
                     <div id="ButtonContainer">
-                        <Button onClick={toggleDiv1} style={{paddingRight:"10px", backgroundColor:'rgb(75,192,  192)'}}>추천업종 보러가기</Button>
-                        <Button onClick={toggleDiv2} style={{paddingLeft:"10px",backgroundColor:'rgb(75,192,192)    '}}>추천지역 보러가기</Button>
+                        <Button onClick={toggleDiv1} style={{ marginLeft:"100px",marginRight:"30px", backgroundColor:'rgb(75,192,  192)'}}>추천업종 보러가기</Button>
+                        <Button onClick={toggleDiv2} style={{marginRight:"30px",backgroundColor:'rgb(75,192,192)    '}}>추천지역 보러가기</Button>
                     </div>
                     
 

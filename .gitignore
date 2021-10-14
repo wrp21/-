@@ -2,4 +2,11 @@
 __pycache__/
 statics/
 venv/
-mydata.csv
+
+# frontend
+node_modules/
+
+# csvs
+csvdatas/
+.ipynb_checkpoints/
+analysisdatas/

@@ -25,7 +25,7 @@ def create_app():
 
 def register_blueprints(app):
     from app.api.analysis import analysis
-    #from app.api import __
+    from app.api.auth import auth
 
     app.register_blueprint(analysis, url_prefix="/api")
-    #app.register_blueprint(__, url_prefix="/api")
+    app.register_blueprint(auth, url_prefix="/api")

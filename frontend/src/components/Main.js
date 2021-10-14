@@ -15,12 +15,9 @@ const Main = ({history}) => {
                 <button onClick={() => {history.push("/Survey")}}>분석하기</button>
             </StyledMent>
             
+
             
         </StyledMainDiv>
-
-
-
-
     );
 
 }
