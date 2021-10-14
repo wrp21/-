@@ -17,14 +17,14 @@ const Survey = ({history, location}) => {
         '서대문구', '구로구', '성북구', '은평구',
         '영등포구', '서초구', '광진구', '강동구', '마포구', 
         '용산구', '강남구', '강서구', '동대문구', '노원구',
-        '도봉구', '종로구', '지역미정'
+        '도봉구', '종로구', '미정'
     ]);
 
     const [categoryList, setCategoryList] = useState([
         '경양식', '기타', '김밥(도시락)', '까페', '분식', '뷔페식',
         '식육(숯불구이)', '일식', '정종/대포집/소주방', '중국식',
         '통닭(치킨)', '패밀리레스트랑', '패스트푸드', '한식',
-        '외국음식전문점(인도태국등)', '횟집'
+        '외국음식전문점(인도태국등)', '횟집', '미정'
     ]);
 
 
@@ -57,6 +57,8 @@ const Survey = ({history, location}) => {
 
         if(tempValue !== "") {
             setCategoryMsg(tempValue + "을 선택하셨습니다.");
+        } else if(tempValue === "미정" || tempValue === "") {
+            setCategoryValue("");
         }
 
     }
@@ -68,6 +70,8 @@ const Survey = ({history, location}) => {
 
         if (tempValue !== "") {
             setRegionMsg(tempValue  + "을 선택하셨습니다.");
+        } else if( tempValue === "미정" || tempValue === "") {
+            setRegionValue("");
         }
     }
 
@@ -75,38 +79,63 @@ const Survey = ({history, location}) => {
     const onClickHandlerSurveyButton = async (event) => {
         event.preventDefault();
         
-        history.push("/Loading");
+        //history.push("/Loading");
 
         // 테스트를 위한 axios
+        let tempRegionValue = regionValue;
+        let tempCategoryValue = categoryValue;
+        
+        let paramValue = {};
+
+        console.log(tempRegionValue);
+        console.log(tempCategoryValue);
+
+
+
+        if ((tempCategoryValue === "" || tempCategoryValue === "미정") && (tempRegionValue === "" || tempRegionValue === "미정")) {
+            alert("업종과 지역 둘중에 하나 이상 선택해야 합니다");
+        } else {
+
+            if (tempCategoryValue === "" || tempCategoryValue === "미정") {
+                paramValue = {region: tempRegionValue}
+            } else if (tempRegionValue === "" || tempRegionValue === "미정") {
+                paramValue = {category: tempCategoryValue}
+            } else {
+                paramValue = {region: tempRegionValue, category: tempCategoryValue}
+            }
+
+            console.log(paramValue)
         
 
-        await axios({
-            method: 'get',                                 // 수정 필요 => 'get'
-            url: 'http://172.18.84.110:5000/api/result',    // 수정 필요
-            params: {region: regionRef.current.options[regionRef.current.selectedIndex].text, category: categoryRef.current.options[categoryRef.current.selectedIndex].text},
-            headers: {'Content-Type': 'application/json'},
-        })
-        .then((response) => {
-            console.log(response);
-            console.log(response.data);
-            history.push({
-                pathname: "/Result",
-                state: {
-                    responseResultData: response.data,
-                    userSelect:[categoryValue,regionValue]
+            await axios({
+                method: 'get',                                 // 수정 필요 => 'get'
+                url: 'http://172.18.84.110:5000/api/result',    // 수정 필요
+                params: paramValue,
+                headers: {'Content-Type': 'application/json'},
+            })
+            .then((response) => {
+                console.log(response);
+                console.log(response.data);
+                history.push({
+                    pathname: "/Result",
+                    state: {
+                        responseResultData: response.data,
+                        userSelect:[categoryValue,regionValue]
 
-                }
-            });
-            alert("pass");
-        })
-        .catch((response) => {
-            console.log(response);
-            history.push("/Survey");
-            alert("error");
-        })
+                    }
+                });
+                alert("pass");
+            })
+            .catch((response) => {
+                console.log(response);
+                history.push("/Survey");
+                alert("error");
+            })
+        }
         
 
     }
+
     
 
     return (
@@ -167,7 +196,7 @@ const Survey = ({history, location}) => {
                 </StyledForm>
             </FormContainer>
 
-        <StyledIntroNav>ss</StyledIntroNav>
+        {/* <StyledIntroNav>ss</StyledIntroNav>
         <StyledIntroNav>ss</StyledIntroNav>
         <StyledIntroNav>ss</StyledIntroNav>
 
@@ -176,7 +205,7 @@ const Survey = ({history, location}) => {
                 Footer
 
             </StyledFooter>
-        </StyledFlexDiv>
+        </StyledFlexDiv> */}
 
 
         </div>

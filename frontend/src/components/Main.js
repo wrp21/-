@@ -58,7 +58,9 @@ const Main = ({history}) => {
 
 
         <StyledIntroMenu>
-            1. 원하시는 음식 업종을 선택하세요.
+            <h2>
+                1. 원하시는 음식 업종을 선택하세요.
+            </h2>
 
             <br></br>
             <br></br>
@@ -71,7 +73,9 @@ const Main = ({history}) => {
         </StyledIntroMenu>
 
         <StyledIntroMenuWhite>
-            2. 원하시는 지역을 선택하세요.
+            <h2>
+                2. 원하시는 지역을 선택하세요.
+            </h2>
 
             <br></br>
             <br></br>
@@ -85,7 +89,9 @@ const Main = ({history}) => {
         </StyledIntroMenuWhite>
 
         <StyledIntroMenu>
-            3. 업종과 지역을 모두 선택하세요.
+            <h2>
+                3. 업종과 지역을 모두 선택하세요.
+            </h2>
 
             <br></br>
             <br></br>
@@ -99,7 +105,7 @@ const Main = ({history}) => {
 
         <StyledFlexDiv>
             <StyledFooter>
-                Hello from Seoul
+                데이터 분석 프로젝트 배달 서비스 2팀
 
             </StyledFooter>
         </StyledFlexDiv>

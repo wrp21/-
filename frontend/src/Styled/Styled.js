@@ -130,9 +130,13 @@ export const StyledLayoutFooter = styled.div`
 
 export const StyledFlexDiv = styled.div`
     display:flex;
+    justify-content:center;
+    align-items:center;
 `;
 export const StyledFooter = styled.footer`
     display:inline-block;
+    justify-content:center;
+    align-items:center;
     /* position:absolute; */
     left:0;
     bottom:0;
@@ -188,7 +192,7 @@ export const StyledIntroUl = styled.a`
 `;
 
 export const StyledIntroDiv = styled.a`
-    padding: 70px 70px;
+    padding: 90px 90px;
     text-decoration:none;
     color:#444;
 
@@ -210,12 +214,22 @@ export const StyledIntroMenu = styled.div`
     padding-bottom:60px;
     background-color:#F5F5F5;
     height:40vh;
+
+    &:hover {
+        background-color: #f44336;
+        color:beige;
+    }
 `;
 
 export const StyledIntroMenuWhite = styled.div`
     padding-top:60px;
     padding-bottom:60px;
     height:40vh;
+
+    &:hover {
+        background-color: #008CBA;
+        color:beige;
+    }
 `;
 
 export const Styledblank = styled.div`
