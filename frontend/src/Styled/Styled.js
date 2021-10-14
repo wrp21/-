@@ -81,10 +81,6 @@ export const StyledAppNavToggleBtn = styled.a`
     color: #bd2f2f;
 `;
 
-// .nav-up {
-//     top: -60px;
-// }
-
 ////// App.js : 상단 내비게이션 헤더 디자인 END //////////////
 
 
@@ -140,17 +136,6 @@ export const StyledFlexDiv = styled.div`
 `;
 
 export const StyledFooter = styled.footer`
-    /* display:inline-block;
-    justify-content:center;
-    align-items:center;
-    left:0;
-    bottom:0;
-    right:0;
-    width:100%;
-    background-color:#2C2C32;
-    color:azure;
-    padding-top: 25px;
-    padding-bottom: 25px; */
 
     padding-top: 25px;
     padding-bottom: 25px;
@@ -166,9 +151,6 @@ export const StyledFooter = styled.footer`
     background-color:#2C2C32;
     color:azure;
 
-
-
-    
 `;
 
 
@@ -186,6 +168,9 @@ export const StyledMainDiv = styled.div`
     align-items:center;
     justify-content:center;
     background-color:#2C2C32;
+    /* background-color:blueviolet; */
+    /* background-color:#675ce9; */
+    /* background-color:black; */
     height:80vh;
     /* width:auto;
     height:auto; */
@@ -202,12 +187,6 @@ export const StyledIntroNav = styled.div`
     height:20vh;
 `;
 
-export const StyledIntroUl = styled.a`
-    
-    
-
-    
-`;
 
 export const StyledIntroDiv = styled.a`
     padding: 90px 90px;
@@ -229,10 +208,14 @@ export const StyledIntroDiv = styled.a`
 `;
 
 export const StyledIntroMenuCategory = styled.div`
+    display:flex;
+    justify-content:left;
     padding-top:60px;
     padding-bottom:60px;
     background-color:#F5F5F5;
-    height:40vh;
+    margin-left: 150px;
+    box-shadow: 0px 3px 3px 1px rgb(0 0 0 / 33%);
+    height:45vh;
     
 
     &:hover {
@@ -246,9 +229,11 @@ export const StyledIntroMenuCategory = styled.div`
 `;
 
 export const StyledIntroMenuRegion = styled.div`
+    display:flex;
+    justify-content:center;
     padding-top:60px;
     padding-bottom:60px;
-    height:40vh;
+    height:45vh;
 
     &:hover {
         background-color: #008CBA;
@@ -258,16 +243,18 @@ export const StyledIntroMenuRegion = styled.div`
 `;
 
 export const StyledIntroMenuBoth = styled.div`
+    display:flex;
+    justify-content:right;
     padding-top:60px;
     padding-bottom:60px;
+    margin-right: 150px;
     background-color:#F5F5F5;
-    height:40vh;
+    height:50vh;
+    box-shadow: 0px 3px 3px 3px rgb(0 0 0 / 33%);
     
 
     &:hover {
-        /* background-color: #f44336; */
         background-color: green;
-        /* background-color:orange; */
         color:azure;
         
         transition : 0.5s;
@@ -282,11 +269,12 @@ export const Styledblank = styled.div`
 
 export const StyledInlineDiv = styled.div`
     /* position:relative; */
-    display:inline;
+    display:inline-block;
     justify-content:center;
-    text-align:center;
+    text-align:left;
     align-items:center;
-    padding-right: 10px;
+    padding: 20px;
+    margin-left:10px;
     
     /* left:100%; */
 `;
@@ -306,6 +294,23 @@ export const StyledMent = styled.div`
     text-align:center;
 `;
 
+export const StyledInlineDivImg = styled.div`
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    width:300px;
+    height:300px;
+    margin-left:50px;
+    margin-right:50px;
+`;
+
+
+export const StyledWrapDiv = styled.div`
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    
+`;
 
 ////// Main.js : 소개 페이지 디자인 END //////////////
 
