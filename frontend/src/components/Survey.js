@@ -1,7 +1,7 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
 
-import { FormContainer, StyledForm, SelectMultiple, StyledSpan } from "../Styled/Styled";
+import { FormContainer, StyledForm, SelectMultiple, StyledSpan, StyledIntroNav, StyledFlexDiv, StyledFooter, } from "../Styled/Styled";
 import { useState, useRef } from "react";
 import axios from "axios";
 
@@ -12,16 +12,19 @@ const Survey = ({history, location}) => {
     const regionRef = useRef(null);
 
     const [regionList, setRegionList] = useState([
-        '중구', '금천구', '송파구', '관악구', '중랑구', '동작구', '성동구', '강북구', '양천구',
-        '서대문구', '구로구', '성북구', '은평구', '영등포구', '서초구', '광진구', '강동구', '마포구', 
-        '용산구', '강남구', '강서구', '동대문구', '노원구', '도봉구', '종로구', '지역미정'
+        '중구', '금천구', '송파구', '관악구', '중랑구',
+        '동작구', '성동구', '강북구', '양천구',
+        '서대문구', '구로구', '성북구', '은평구',
+        '영등포구', '서초구', '광진구', '강동구', '마포구', 
+        '용산구', '강남구', '강서구', '동대문구', '노원구',
+        '도봉구', '종로구', '미정'
     ]);
 
     const [categoryList, setCategoryList] = useState([
-        '한식', '호프/통닭', '분식', '중국식', '통닭(치킨)', '까페', '패스트푸드', '기타', '김밥(도시락)',
-        '일식', '정종/대포집/소주방', '경양식', '패밀리레스트랑', '뷔페식', '감성주점', '식육(숯불구이)', 
-        '출장조리', '라이브카페', '전통찻집', '외국음식전문점(인도태국등)', '탕류(보신용)', '복어취급', 
-        '다방', '키즈카페', '냉면집', '이동조리', '룸살롱', '횟집', '식품등 수입판매업', '기타 휴게음식점', '일반조리판매', '업종미정'
+        '경양식', '기타', '김밥(도시락)', '까페', '분식', '뷔페식',
+        '식육(숯불구이)', '일식', '정종/대포집/소주방', '중국식',
+        '통닭(치킨)', '패밀리레스트랑', '패스트푸드', '한식',
+        '외국음식전문점(인도태국등)', '횟집', '미정'
     ]);
 
 
@@ -54,6 +57,8 @@ const Survey = ({history, location}) => {
 
         if(tempValue !== "") {
             setCategoryMsg(tempValue + "을 선택하셨습니다.");
+        } else if(tempValue === "미정" || tempValue === "") {
+            setCategoryValue("");
         }
 
     }
@@ -65,6 +70,8 @@ const Survey = ({history, location}) => {
 
         if (tempValue !== "") {
             setRegionMsg(tempValue  + "을 선택하셨습니다.");
+        } else if( tempValue === "미정" || tempValue === "") {
+            setRegionValue("");
         }
     }
 
@@ -72,43 +79,67 @@ const Survey = ({history, location}) => {
     const onClickHandlerSurveyButton = async (event) => {
         event.preventDefault();
         
-        history.push("/Loading");
+        //history.push("/Loading");
 
         // 테스트를 위한 axios
+        let tempRegionValue = regionValue;
+        let tempCategoryValue = categoryValue;
+        
+        let paramValue = {};
+
+        console.log(tempRegionValue);
+        console.log(tempCategoryValue);
+
+
+        if ((tempCategoryValue === "" || tempCategoryValue === "미정") && (tempRegionValue === "" || tempRegionValue === "미정")) {
+            alert("업종과 지역 둘중에 하나 이상 선택해야 합니다");
+        } else {
+
+            if (tempCategoryValue === "" || tempCategoryValue === "미정") {
+                paramValue = {region: tempRegionValue}
+            } else if (tempRegionValue === "" || tempRegionValue === "미정") {
+                paramValue = {category: tempCategoryValue}
+            } else {
+                paramValue = {region: tempRegionValue, category: tempCategoryValue}
+            }
+
+            //console.log(paramValue);
         
 
-        await axios({
-            method: 'get',                                 // 수정 필요 => 'get'
-            url: 'http://172.22.56.190:5000/api/result',    // 수정 필요
-            params: {region: regionRef.current.options[regionRef.current.selectedIndex].text, category: categoryRef.current.options[categoryRef.current.selectedIndex].text},
-            headers: {'Content-Type': 'application/json'},
-        })
-        .then((response) => {
-            console.log(response);
-            console.log(response.data);
-            history.push({
-                pathname: "/Result",
-                state: {
-                    responseResultData: response.data,
-                    userSelect:[categoryValue,regionValue]
+            await axios({
+                method: 'get',                                 // 수정 필요 => 'get'
+                url: 'http://172.30.1.30:5000/api/result',    // 수정 필요
+                params: paramValue,
+                headers: {'Content-Type': 'application/json'},
+            })
+            .then((response) => {
+                //console.log(response);
+                console.log(response.data);
+                history.push({
+                    pathname: "/Result",
+                    state: {
+                        responseResultData: response.data,
+                        userSelect:[categoryValue,regionValue]
 
-                }
-            });
-            alert("pass");
-        })
-        .catch((response) => {
-            console.log(response);
-            history.push("/Survey");
-            alert("error");
-        })
+                    }
+                });
+                alert("pass");
+            })
+            .catch((response) => {
+                console.log("에러 잡음",response);
+                history.push("/Survey");
+                alert("error");
+            })
+        }
         
 
     }
+
     
 
     return (
         <div className="class-survey">
-            
+        
             <FormContainer>
                 <StyledForm>
                     <label>1. 어떤 업종을 창업하실 계획인가요?</label>
@@ -164,8 +195,20 @@ const Survey = ({history, location}) => {
                 </StyledForm>
             </FormContainer>
 
+        {/* <StyledIntroNav>ss</StyledIntroNav>
+        <StyledIntroNav>ss</StyledIntroNav>
+        <StyledIntroNav>ss</StyledIntroNav>
+
+        <StyledFlexDiv>
+            <StyledFooter>
+                Footer
+
+            </StyledFooter>
+        </StyledFlexDiv> */}
+
 
         </div>
+        
     );
 
 }

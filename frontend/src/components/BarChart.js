@@ -28,6 +28,7 @@ export const BarChart=(props)=>{
         labels: list.data[0],
         datasets:[
             {
+                label:'페업건수',
                 borderWidth:1,
                 data: list.data[1],
                 backgroundColor:'rgb(75,192,192)'
@@ -36,7 +37,7 @@ export const BarChart=(props)=>{
     };
 
     return(
-       <div style={{width:450, height:300,float:'left'}}>
+       <div>
            <Bar data={data} options={options}></Bar>
        </div>
     );
