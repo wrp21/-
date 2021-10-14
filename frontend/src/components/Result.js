@@ -203,8 +203,7 @@ const Result = ({history})=>{
                 }
 
                 {closeDate !== undefined &&
-                    <div id="GraphContainer">
-                        
+                    <div id="GraphContainer">    
                         <LineChart data={[closeDate,closeCount]}></LineChart>
                     </div>
                 }

@@ -8,7 +8,7 @@
     
     border-style: solid;
     border-radius: 30px;
-    width:80%;
+    width:100%;
     height: 740px;
     margin:70px auto;
 
@@ -45,7 +45,6 @@
 }
 
 #BottomContainer{
-    display:inline;
     justify-content: center;
     align-items: center;
 
@@ -53,9 +52,12 @@
 }
 
 #ButtonContainer{
+
+    width: 80px;
+
     text-align: center;
     
-    display: flex;
+    display: inline;
     justify-content: center;
     align-items: center;
     width: 50%;
