@@ -36,22 +36,22 @@ function App({history}) {
         <StyledAppNav>    {/* class="navbar" id="nav_bar */}
           <StyledAppNavLogo>  {/* class="navbar__logo" */}
             <li>
-              <StyledAppRouterDomLink to="/Main">상권 분석 서비스</StyledAppRouterDomLink>
+              <StyledAppRouterDomLink to="/Main" smooth={true}>상권 분석 서비스</StyledAppRouterDomLink>
             </li>
           </StyledAppNavLogo>
 
           <StyledAppNavMenuUl>  {/* class="navbar__menu" */}
               <StyledAppNavMenuLi>
-                <StyledAppRouterDomLink to="/Main">소개</StyledAppRouterDomLink>
+                <StyledAppRouterDomLink to="/Main" >소개</StyledAppRouterDomLink>
               </StyledAppNavMenuLi>
               <StyledAppNavMenuLi>
-                <StyledAppRouterDomLink to="/Survey">분석하기</StyledAppRouterDomLink>
+                <StyledAppRouterDomLink to="/Survey" >분석하기</StyledAppRouterDomLink>
               </StyledAppNavMenuLi>
               <StyledAppNavMenuLi>
-                <StyledAppRouterDomLink to="/Login">로그인</StyledAppRouterDomLink>
+                <StyledAppRouterDomLink to="/Login" >로그인</StyledAppRouterDomLink>
               </StyledAppNavMenuLi>
               <StyledAppNavMenuLi>
-                <StyledAppRouterDomLink to="/Register">회원가입</StyledAppRouterDomLink>
+                <StyledAppRouterDomLink to="/Register" >회원가입</StyledAppRouterDomLink>
               </StyledAppNavMenuLi>
           </StyledAppNavMenuUl>
           <StyledAppNavToggleBtn href="#">  {/* class="navbar__toggleBtn" */}

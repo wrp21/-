@@ -15,6 +15,8 @@ yarn add react-bootstrap
 yarn add bootstrap
 yarn add react-chartjs-2 chart.js
 yarn add react-icons
+yarn add react-scroll
+yarn add react-transition-group
 
 기능
 1. 아이디(email) 패스워드 입력, 전송
