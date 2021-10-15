@@ -5,6 +5,10 @@ export const DualBarChart=(props)=>{
 
     
     const list = props;
+
+    console.log('이거',list.data[0]);
+    console.log('코로나이전',list.data[1]);
+    console.log('코로나이후',list.data[2]);
     
     const options = {
         legend:{
@@ -21,17 +25,17 @@ export const DualBarChart=(props)=>{
         maintainAspecRatio:false
     }
     const data = {
-        labels: ['강남구','성북구','강동구','강서구','영통구'], //지역 인덱스
+        labels: list.data[0], //지역 인덱스
         datasets:[
             {
                 label:'코로나이전 폐업건수',
                 borderWidth:1,
-                data: [1,2,3,4,5],
+                data: list.data[1],
                 backgroundColor:'blue'
             },{
                 label:'코로나 이후 폐업건수',
                 borderWidth:1,
-                data: [5,4,3,4,5],
+                data: list.data[2],
                 backgroundColor:'yellow'
             }
         ]

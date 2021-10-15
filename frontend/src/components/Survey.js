@@ -107,11 +107,10 @@ const Survey = ({history, location}) => {
 
             console.log(paramValue)
 
-        
 
             await axios({
                 method: 'get',                                 
-                url: 'http://172.30.1.19:5000/api/result',    
+                url: 'http://172.30.1.35:5000/api/result',    
                 params: paramValue,
                 headers: {'Content-Type': 'application/json'},
             })

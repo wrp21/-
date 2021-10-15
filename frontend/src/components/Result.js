@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 //////////////////////////////////////////////////////////
 import Button from 'react-bootstrap/Button';
 
-import { BarChart } from './BarChart';
+
 
 
 
@@ -14,6 +14,7 @@ import { BarChart } from './BarChart';
 import '../Styled/result.css';
 import { LineChart } from './LineChart';
 import { DualBarChart } from './DualBarChart';
+import { BarChart } from './BarChart';
 
 import Chart from 'chart.js/auto';
 import axios from 'axios';
@@ -22,6 +23,7 @@ import axios from 'axios';
 
 
 const Result = ({history})=>{
+
 /////////////////////////////////////////////////////////////////////// location 사용
     const location = useLocation();
     const data = location.state.responseResultData;
@@ -35,6 +37,7 @@ const Result = ({history})=>{
     console.log('지역/업종',userSelect);
 ///////////////////////////////////////////////////////////////////////////
 
+
     // 지역-업종 둘다 선택했을 때
     let closeDate; //폐업연월
     let closeCount; //폐업건수
@@ -45,34 +48,49 @@ const Result = ({history})=>{
     let category;
     let region;
 
-    // 임시변수
- 
-    /*
-    const [idx, setIdx] = useState([]);
-    const [preRegionCovid, setPreRegionCovid] = useState([]);
-    const [postRegionCovid, setPostRegionCovid] = useState([]);
-    const [preCateogryCovid, setPreCategoryCovid] = useState([]);
-    const [postCategoryCovid, setPostCategoryCovid] = useState([]);
-    */
 
-    
+
+    let regionCovid;
+    let categoryCovid;
+
+    const [regionListData, setRegionListData] = useState([]);
+    const [categoryListData, setCategoryListData] = useState([]);
+
     const getData = async()=>{
 
-        // 업종만 선택했을 경우-> 지역에 대한 데이터 가져옴
-        await axios({
-            method: 'get',                                 
-            url: 'http://172.30.1.19:5000/api/result',    
-            params: {category:userSelect[0]},
-            headers: {'Content-Type': 'application/json'},
-        }).then((response)=>{
-            console.log('지역별 데이터 확인',response);
-            console.log(response.data['pre-covid']);
+        const response = await axios.all([
+            await axios({
+                method: 'get',                                 
+                url: 'http://172.30.1.35:5000/api/result',    
+                params: {category:userSelect[0]},
+                headers: {'Content-Type': 'application/json'},
+            }),
+            await axios({
+                method: 'get',                                 
+                url: 'http://172.30.1.35:5000/api/result',    
+                params: {region:userSelect[1]},
+                headers: {'Content-Type': 'application/json'},
+            })
+        ]);
 
-        });
+        console.log('response',response);
+        console.log('response.data0',response[0].data);
+        console.log('response.data1',response[1].data);
+
+        regionCovid = response[0].data;
+        categoryCovid = response[1].data;
+
+
+        console.log('regionCovid',regionCovid);
+        console.log('categoryCovid',categoryCovid);
+
+        setRegionListData([Object.keys(regionCovid['pre-covid']),Object.values(regionCovid['pre-covid']),Object.values(regionCovid['post-covid'])]);
+
+        setCategoryListData([Object.keys(categoryCovid['pre-covid']),Object.values(categoryCovid['pre-covid']),Object.values(categoryCovid['post-covid'])]);
+
 
     };
-    
-
+   
     //userSelect[0]:업종
     // 업종 선택 안한 경우-> 지역만 선택한 경우
     if(userSelect[0] ==='미정'|| userSelect[0] === ''){
@@ -82,13 +100,10 @@ const Result = ({history})=>{
         preCovid = Object.values(data['pre-covid']);
         postCovid = Object.values(data['post-covid']);
 
-
     }
 
     //userSelect[1]: 지역
-
     else if(userSelect[1] === '미정' || userSelect[1] ==='' ){
-
 
         region = Object.keys(data['post-covid']);
 
@@ -98,29 +113,15 @@ const Result = ({history})=>{
     }
     // 둘다 선택했을 경우
     else{
-
+ 
         closeDate = Object.keys(data);
         closeCount = Object.values(data);
 
         getData();
 
     }
-
-    console.log("======데이터 확인 =======")
-    console.log("지역 확인",region);
-    console.log("업종 확인",category);
-    console.log('코로나 이전',preCovid);
-    console.log('코로나 이후',postCovid);
-
-    console.log("폐업연월",closeDate);
-    console.log("폐업건수",closeCount);
-
     
-
-
-  
-
-    //업종
+    //업종 추천 버튼 눌렀을 때
     const toggleDiv1=()=>{
 
         const categoryDiv = document.getElementById('category');
@@ -138,7 +139,7 @@ const Result = ({history})=>{
         scrollDown();
     }
 
-    //지역
+    //지역추천 버튼 눌렀을 때
     const toggleDiv2=()=>{
         
         const regionDiv = document.getElementById('region');
@@ -162,53 +163,6 @@ const Result = ({history})=>{
         
     }
 
-
-    //let LineChart;
-    // 라인 차트 그리기-> 업종/지역 모두 선택했을 때만
-
-    /*
-    const buildChart = () =>{
-        var ctx = document.getElementById("LineChart").getContext("2d");
-
-        if(typeof LineChart !== 'undefined') LineChart.destroy();
-
-        LineChart = new Chart(ctx,{
-            type:'line',
-            data:{
-                labels:closeDate,
-                datasets:[{
-                    label:'폐업 추이',
-                    data:closeCount,
-                    fill:false,
-                    borderColor:'rgb(75,192,192)',
-                    tension:0.1
-                }]
-            },
-        });
-    }
-
-    // 바 차트 그리기
-    
-    /*
-    const buildBarChart =()=>{
-        var ctx = document.getElementById("MyBarChart").getContext("2d");
-
-        let MyBarChart = new Chart(ctx,{
-            type:'bar',
-            data:{
-                labels:closeDate,
-                datasets:[{
-                    label:'폐업 추이',
-                    data:closeCount,
-                    fill:false,
-                    backgroundColor:'rgb(75,192,192)',
-                    tension:0.1
-                }]
-            },
-
-        });
-    }
-    */
     
     return(
         <div>
@@ -272,14 +226,14 @@ const Result = ({history})=>{
                 <div id='recommend'>
                     <div id='category'>
                         <h2>{userSelect[1]} 지역 추천 업종입니다.</h2>
-                        <BarChart data={[closeDate,closeCount]}></BarChart>
 
-                        <DualBarChart></DualBarChart>
+                        <DualBarChart data={categoryListData}></DualBarChart>
                         
                     </div>
                     <div id='region'>
                         <h2>{userSelect[0]} 업종 추천 지역입니다.</h2>
-                        <BarChart data={[closeDate,closeCount]}></BarChart>
+
+                        <DualBarChart data={regionListData}></DualBarChart>
                         
                     </div>
                 </div>       
