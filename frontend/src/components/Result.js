@@ -157,6 +157,14 @@ const Result = ({ history }) => {
     scrollDown();
   };
 
+  useEffect(()=> {
+    const regionDiv = document.getElementById("region");
+    const categoryDiv = document.getElementById("category");
+
+    regionDiv.style.display = "none";
+    categoryDiv.style.display= "none";
+  }, []);
+
   // 버튼 클릭시 스크롤 아래로 내리기
   const scrollDown = () => {
     document.documentElement.scrollTop = document.body.scrollHeight;
@@ -235,12 +243,10 @@ const Result = ({ history }) => {
           <div id="recommend">
             <div id="category">
               <h2>{userSelect[1]} 지역 추천 업종입니다.</h2>
-
               <DualBarChart data={categoryListData}></DualBarChart>
             </div>
             <div id="region">
               <h2>{userSelect[0]} 업종 추천 지역입니다.</h2>
-
               <DualBarChart data={regionListData}></DualBarChart>
             </div>
           </div>
