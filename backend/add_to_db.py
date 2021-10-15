@@ -15,10 +15,10 @@ def add_to_db():
     df.to_sql(name="closed_group", con=db_connection,
               if_exists='replace', index=False)
 
-    # 전체 기간의 시간 - 건수 데이터를 whole 테이블에 추가
-    time_count = pd.read_csv('../dataAnalysis/csvdata/whole.csv', encoding='cp949')
-    time_count.to_sql(name='whole', con=db_connection,
-                      if_exists='replace', index=False)
+    # # 전체 기간의 시간 - 건수 데이터를 whole 테이블에 추가
+    # time_count = pd.read_csv('../dataAnalysis/csvdata/whole.csv', encoding='cp949')
+    # time_count.to_sql(name='whole', con=db_connection,
+    #                   if_exists='replace', index=False)
 
     pre_closed_count = pd.read_csv(
         '../dataAnalysis/csvdata/past_closed_normalized.csv', encoding='cp949')
@@ -30,15 +30,14 @@ def add_to_db():
     post_closed_count.to_sql(
         name='post_closed_count', con=db_connection, if_exists='replace', index=False)
 
-    pre_cat_recommendation = pd.read_csv(
-        '../dataAnalysis/csvdata/pre_cat_recommendation.csv', encoding='utf-8')
-    pre_cat_recommendation.to_sql(name='pre_cat_recommendation',
-                         con=db_connection, if_exists='replace', index=False)
+    # pre_cat_recommendation = pd.read_csv(
+    #     '../dataAnalysis/csvdata/pre_cat_recommendation.csv', encoding='utf-8')
+    # pre_cat_recommendation.to_sql(name='pre_cat_recommendation',
+    #                      con=db_connection, if_exists='replace', index=False)
 
-    post_cat_recommendation = pd.read_csv(
-        '../dataAnalysis/csvdata/post_cat_recommendation.csv', encoding='utf-8')
-    post_cat_recommendation.to_sql(name='post_cat_recommendation',
-                         con=db_connection, if_exists='replace', index=False)
-
+    # post_cat_recommendation = pd.read_csv(
+    #     '../dataAnalysis/csvdata/post_cat_recommendation.csv', encoding='utf-8')
+    # post_cat_recommendation.to_sql(name='post_cat_recommendation',
+    #                      con=db_connection, if_exists='replace', index=False)
 
 add_to_db()
