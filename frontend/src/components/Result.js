@@ -44,7 +44,7 @@ const Result = ({ history }) => {
   const getRegionData = async () => {
     await axios({
       method: "get",
-      url: "http://192.168.0.26:5000/api/result",
+      url: "/api/result",
       params: { category: userSelect[0] },
       headers: { "Content-Type": "application/json" },
     })

@@ -138,7 +138,7 @@ const Register = ({history}) => {
             
                 await axios({
                     method: 'post',
-                    url: 'http://127.0.0.1:5000/register',
+                    url: 'api/register',
                     data: {email: inputIdRef.current.value, pw: inputRepeatPasswordRef.current.value},
                     //headers: {'Content-Type': 'application/json'},
                 })
