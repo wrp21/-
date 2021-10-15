@@ -1,7 +1,7 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
 
-import { FormContainer, StyledForm, SelectMultiple, StyledSpan, StyledIntroNav, StyledFlexDiv, StyledFooter, } from "../Styled/Styled";
+import { FormContainer, StyledForm, SelectMultiple, StyledSpan } from "../Styled/Styled";
 import { useState, useRef } from "react";
 import axios from "axios";
 
@@ -87,9 +87,6 @@ const Survey = ({history, location}) => {
         
         let paramValue = {};
 
-        console.log(tempRegionValue);
-        console.log(tempCategoryValue);
-
 
         if ((tempCategoryValue === "" || tempCategoryValue === "미정") && (tempRegionValue === "" || tempRegionValue === "미정")) {
             alert("업종과 지역 둘중에 하나 이상 선택해야 합니다");
@@ -104,8 +101,6 @@ const Survey = ({history, location}) => {
             }
 
 
-            console.log(paramValue)
-
             await axios({
                 method: 'get',                                 // 수정 필요 => 'get'
                 url: 'http://192.168.0.26:5000/api/result',    // 수정 필요
@@ -113,7 +108,6 @@ const Survey = ({history, location}) => {
                 headers: {'Content-Type': 'application/json'},
             })
             .then((response) => {
-                console.log("response in survey ...", response);
                 history.push({
                     pathname: "/Result",
                     state: {
@@ -122,11 +116,8 @@ const Survey = ({history, location}) => {
 
                     }
                 });
-                alert("pass");
             })
             .catch((response) => {
-
-                console.log(response);
                 history.push("/Survey");
                 alert("error");
             })
@@ -194,18 +185,6 @@ const Survey = ({history, location}) => {
 
                 </StyledForm>
             </FormContainer>
-
-        {/* <StyledIntroNav>ss</StyledIntroNav>
-        <StyledIntroNav>ss</StyledIntroNav>
-        <StyledIntroNav>ss</StyledIntroNav>
-
-        <StyledFlexDiv>
-            <StyledFooter>
-                Footer
-
-            </StyledFooter>
-        </StyledFlexDiv> */}
-
 
         </div>
         

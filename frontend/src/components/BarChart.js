@@ -4,12 +4,7 @@ import { Bar } from 'react-chartjs-2';
 export const BarChart=(props)=>{
 
     
-    const list = props;
-
-    console.log(list.data[0]);
-    console.log(list.data[1]);
-    
-    
+    const list = props;  
     const options = {
         legend:{
             display:false,

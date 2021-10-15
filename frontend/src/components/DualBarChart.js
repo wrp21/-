@@ -5,10 +5,6 @@ export const DualBarChart=(props)=>{
 
     
     const list = props;
-
-    console.log('이거',list.data[0]);
-    console.log('코로나이전',list.data[1]);
-    console.log('코로나이후',list.data[2]);
     
     const options = {
         legend:{
