@@ -1,7 +1,6 @@
 import os
 from flask import request, Blueprint, jsonify, abort
 import pandas as pd
-from pprint import pprint
 
 from sqlalchemy import create_engine
 
@@ -14,11 +13,6 @@ conn = db_connection.connect()
 
 @analysis.route("/result", methods=["GET"])
 def get_analysis_result():
-    '''
-    #
-    #
-    #
-    '''
     region = request.args.get("region")
     category = request.args.get("category")
 

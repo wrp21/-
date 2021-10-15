@@ -161,8 +161,8 @@ const Result = ({ history }) => {
     const regionDiv = document.getElementById("region");
     const categoryDiv = document.getElementById("category");
 
-    regionDiv.style.display = "none";
-    categoryDiv.style.display= "none";
+    if (regionDiv) regionDiv.style.display = "none";
+    if (categoryDiv) categoryDiv.style.display= "none";
   }, []);
 
   // 버튼 클릭시 스크롤 아래로 내리기

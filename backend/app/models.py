@@ -2,7 +2,7 @@ from . import db
 
 class User(db.Model):
     '''
-    # user table
+    # user
     # - id (int, pk)
     # - email (varchar(32), not null)
     # - pw (binary(60), not null)
