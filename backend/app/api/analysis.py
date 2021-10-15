@@ -46,11 +46,8 @@ def get_analysis_result():
         ret["description"] = "\'{0}\' 지역에서 \'{1}\' 업종의 폐업 정보입니다.".format(
             region, category)
 
-    # 지역만 입력한 경우
+    # 하나만 입력한 경우
     else:
-        pre_df = pd.read_sql_table('pre_closed_count', conn)
-        post_df = pd.read_sql_table('post_closed_count', conn)
-
         ret["pre-covid"] = {}
         ret["post-covid"] = {}
         ret["description"] = ""
@@ -59,6 +56,13 @@ def get_analysis_result():
         post_ranking = []
 
         if region:
+            pre_df = pd.read_sql_table('pre_cat_recommendation', conn)
+            post_df = pd.read_sql_table('post_cat_recommendation', conn)
+
+            pre_df = pre_df.set_index("Unnamed: 0").transpose().reset_index()
+            post_df = post_df.set_index("Unnamed: 0").transpose().reset_index()
+
+            pprint(pre_df.head())
             # 코로나 이전
             try:
                 x_series = pre_df.iloc[:, 0]
@@ -96,8 +100,13 @@ def get_analysis_result():
             ret["description"] += make_desc(False, False, True, region, post_ranking)
 
         elif category:
+            pre_df = pd.read_sql_table('pre_closed_count', conn)
+            post_df = pd.read_sql_table('post_closed_count', conn)
+
             pre_df = pre_df.set_index("Unnamed: 0").transpose().reset_index()
             post_df = post_df.set_index("Unnamed: 0").transpose().reset_index()
+
+            pprint(pre_df.head())
 
             try:
                 x_series = pre_df.iloc[:, 0]
