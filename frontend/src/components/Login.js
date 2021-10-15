@@ -1,6 +1,6 @@
 
 import React, {useState} from "react";
-import { FormContainer,StyledForm,UserInput } from "../Styled/Styled";
+import { FormContainer,StyledForm,UserInput, StyledFlexDiv, StyledFooter, } from "../Styled/Styled";
 import Button from 'react-bootstrap/Button';
 import { fetchLogin } from "./service";
 
@@ -37,19 +37,25 @@ const Login = ({history}) => {
 
 
     return(
-        <FormContainer>
-            <StyledForm>
+        <>
+            <FormContainer>
+                <StyledForm>
+                    <label>ID</label>
+                    <UserInput type="id" value={id} onChange={onIdHandler} required/>
+                    <label>Password</label>
+                    <UserInput type="password" value={password} onChange={onPasswordHandler} required/>
+                    <br/>
+                    <Button onClick={onClickLogin} disabled={(id==='' || password ==='')}>로그인</Button>
+                </StyledForm>
                 
-                <label>ID</label>
-                <UserInput type="id" value={id} onChange={onIdHandler} required/>
-                <label>Password</label>
-                <UserInput type="password" value={password} onChange={onPasswordHandler} required/>
-                
-                <br/>
- 
-                <Button onClick={onClickLogin} disabled={(id==='' || password ==='')}>로그인</Button>
-            </StyledForm>
-        </FormContainer>
+            </FormContainer>
+
+            <StyledFlexDiv>
+                <StyledFooter>
+                    Footer
+                </StyledFooter>
+            </StyledFlexDiv>
+        </>
     )
 }
 

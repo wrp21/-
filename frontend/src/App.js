@@ -7,83 +7,83 @@ import Result from './components/Result';
 import Loading from './components/Loading';
 
 
-import {Link, Route} from 'react-router-dom';
+import { Route, Switch, useLocation} from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaBars } from "react-icons/fa";
-import {MainHeadContainer,Title,NaviContainer, StyledAppDiv, StyledAppHeader,
-        StyledAppNav, StyledAppNavLogo, 
-        StyledAppRouterDomLink, StyledAppNavToggleBtn, StyledAppNavMenuUl,
-        StyledAppNavMenuLi} from './Styled/Styled';
+import { FaBars} from "react-icons/fa";
 
-function App() {
+
+import {  StyledAppDiv, StyledAppHeader,
+          StyledAppNav, StyledAppNavLogo, 
+          StyledAppRouterDomLink, StyledAppNavToggleBtn, StyledAppNavMenuUl, StyledFlexDiv, 
+          StyledAppNavMenuLi, StyledFooter, StyledSpace, StyledLayoutMain, StyledLayoutSurvey,
+          StyledLayoutLogin, StyledLayoutRegister, StyledLayoutLoading, 
+          StyledLayoutResult, StyledInlineDiv } from './Styled/Styled';
+
+
+
+
+function App({history}) {
+  
+  const location = useLocation();
+  
   return (
+
     <StyledAppDiv className="App">
 
       <StyledAppHeader>
         <StyledAppNav>    {/* class="navbar" id="nav_bar */}
           <StyledAppNavLogo>  {/* class="navbar__logo" */}
             <li>
-              <StyledAppRouterDomLink to="/Main">상권 분석 서비스</StyledAppRouterDomLink>
+              <StyledAppRouterDomLink to="/Main" smooth={true}>상권 분석 서비스</StyledAppRouterDomLink>
             </li>
           </StyledAppNavLogo>
 
           <StyledAppNavMenuUl>  {/* class="navbar__menu" */}
               <StyledAppNavMenuLi>
-                <StyledAppRouterDomLink to="/Main">소개</StyledAppRouterDomLink>
+                <StyledAppRouterDomLink to="/Main" >소개</StyledAppRouterDomLink>
               </StyledAppNavMenuLi>
               <StyledAppNavMenuLi>
-                <StyledAppRouterDomLink to="/Survey">분석하기</StyledAppRouterDomLink>
+                <StyledAppRouterDomLink to="/Survey" >분석하기</StyledAppRouterDomLink>
               </StyledAppNavMenuLi>
               <StyledAppNavMenuLi>
-                <StyledAppRouterDomLink to="/Login">로그인</StyledAppRouterDomLink>
+                <StyledAppRouterDomLink to="/Login" >로그인</StyledAppRouterDomLink>
               </StyledAppNavMenuLi>
               <StyledAppNavMenuLi>
-                <StyledAppRouterDomLink to="/Register">회원가입</StyledAppRouterDomLink>
+                <StyledAppRouterDomLink to="/Register" >회원가입</StyledAppRouterDomLink>
               </StyledAppNavMenuLi>
-
           </StyledAppNavMenuUl>
-          
           <StyledAppNavToggleBtn href="#">  {/* class="navbar__toggleBtn" */}
             <FaBars />
           </StyledAppNavToggleBtn>
-          
         </StyledAppNav>
-
       </StyledAppHeader>
 
+      {/* <TransitionGroup className="transition-group">
+        <CSSTransition key={location.pathname} classNames="fade" timeout={500}>  
+          <Switch location={location}> */}
+            <StyledLayoutMain>
+                <Route path="/" component={Main} exact />
+                <Route path="/Main" component={Main} exact />
+                <Route path="/Survey" component={Survey} exact />
+                <Route path="/login" component={Login} exact />
+                <Route path="/Register" component={Register} exact />
+                <Route path="/Loading" component={Loading} exact />
+                <Route path='/Result' component={Result} exact/>
+                
+            </StyledLayoutMain>
+          {/* </Switch>
+        </CSSTransition>
+      </TransitionGroup> */}
 
+      
+      
+        
+            
+        
+      
 
-      {/* <MainHeadContainer>
-        <Title>예비 창업자를 위한 상권 분석 서비스</Title>
-        <div>
-          <NaviContainer>
-            <nav>
-              <li>
-                <Link to="/Main">메인페이지</Link>
-              </li>
-              <li>
-                <Link to="/Survey">분석하기</Link>
-              </li>
-              <li>
-                <Link to="/Login">로그인</Link>
-              </li>
-              <li>
-                <Link to="/Register">회원가입</Link>
-              </li>
-
-            </nav>
-          </NaviContainer>
-        </div>
-      </MainHeadContainer> */}
-      <div>
-          <Route path="/Main" component={Main} exact />
-          <Route path="/Survey" component={Survey} exact />
-          <Route path="/login" component={Login} exact />
-          <Route path="/Register" component={Register} exact />
-          <Route path="/Loading" component={Loading} exact />
-          <Route path='/Result' component={Result} exact/>
-      </div>
     </StyledAppDiv>
   );
 }

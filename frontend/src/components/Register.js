@@ -3,7 +3,7 @@ import axios from "axios";
 import {useState, useRef} from "react";
 import styled from "styled-components";
 
-import {UserInput, StyledForm, FormContainer, StyledSpan} from '../Styled/Styled';
+import {UserInput, StyledForm, FormContainer, StyledSpan ,StyledFlexDiv, StyledFooter,} from '../Styled/Styled';
 import Button from 'react-bootstrap/Button';
 
 /* 회원가입 컴포넌트 Register
@@ -15,6 +15,9 @@ yarn add react-bootstrap
 yarn add bootstrap
 yarn add react-chartjs-2 chart.js
 yarn add react-icons
+yarn add react-scroll
+yarn add react-transition-group
+yarn add react-reveal
 
 기능
 1. 아이디(email) 패스워드 입력, 전송
@@ -293,6 +296,12 @@ const Register = ({history}) => {
 
 
             </FormContainer>
+
+            <StyledFlexDiv>
+                <StyledFooter>
+                    Footer
+                </StyledFooter>
+            </StyledFlexDiv>
         </div>
         
     );

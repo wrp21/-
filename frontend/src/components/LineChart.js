@@ -32,7 +32,8 @@ export const LineChart = (props)=>{
         labels:list.data[0],
         datasets:[
             {
-                borderWidth:1,
+                label:'페업건수',
+                borderWidth:3,
                 data:list.data[1],
                 backgroundColor:'rgb(75,192,192)',
                 borderColor:'rgb(75,192,192)'
@@ -42,7 +43,7 @@ export const LineChart = (props)=>{
     };
 
     return(
-        <div>
+        <div style={{width:700,height:700}}>
             <Line data={data} option={options}></Line>
         </div>
     );
