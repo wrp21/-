@@ -29,9 +29,9 @@ const Result = ({history})=>{
     const data = location.state.responseResultData;
 
     const userSelect = location.state.userSelect;
-    console.log('데이터 확인',data);
-    console.log("코로나 이후 데이터",data['post-covid']);
-    console.log("코로나 이전 데이터",data['pre-covid']);
+    console.log('데이터 확인',data['data']);
+    //console.log("코로나 이후 데이터",data['post-covid']);
+    //console.log("코로나 이전 데이터",data['pre-covid']);
 
 
     console.log('지역/업종',userSelect);
@@ -62,7 +62,7 @@ const Result = ({history})=>{
     const getRegionData = async()=>{
         await axios({
                 method: 'get',                                 
-                url: 'http://192.168.0.10:5000/api/result',    
+                url: 'http://172.30.1.35:5000/api/result',    
                 params: {category:userSelect[0]},
                 headers: {'Content-Type': 'application/json'},
 
@@ -133,8 +133,8 @@ const Result = ({history})=>{
     // 둘다 선택했을 경우
     else{
 
-        closeDate = Object.keys(data);
-        closeCount = Object.values(data);
+        closeDate = Object.keys(data['data']);
+        closeCount = Object.values(data['data']);
 
     }
     
