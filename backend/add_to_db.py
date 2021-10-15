@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 
 def add_to_db():
     id = "root"
-    pw = "Enwns1989!"
+    pw = "q1w2e3r4"
     db_name = "data_analysis_project"
 
     db_address = "mysql+pymysql://{0}:{1}@127.0.0.1:3306/{2}".format(

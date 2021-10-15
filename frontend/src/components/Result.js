@@ -62,11 +62,11 @@ const Result = ({history})=>{
     const getRegionData = async()=>{
         await axios({
                 method: 'get',                                 
-                url: 'http://172.30.1.35:5000/api/result',    
+                url: 'http://192.168.0.10:5000/api/result',    
                 params: {category:userSelect[0]},
                 headers: {'Content-Type': 'application/json'},
-            })
-            .then((response) => {
+
+            }).then((response) => {
                 console.log(response);
                 console.log('지역 데이터',response.data);
 
