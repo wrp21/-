@@ -10,7 +10,7 @@ import Loading from './components/Loading';
 import {Link, Route} from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaBars} from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import {MainHeadContainer,Title,NaviContainer, StyledAppDiv, StyledAppHeader,
         StyledAppNav, StyledAppNavLogo, 
         StyledAppRouterDomLink, StyledAppNavToggleBtn, StyledAppNavMenuUl,

@@ -6,11 +6,8 @@ from pprint import pprint
 from sqlalchemy import create_engine
 
 analysis = Blueprint('analysis', __name__, url_prefix="/api")
-id = "root"
-pw = "Enwns1989!"
-db_name = "data_analysis_project"
 
-db_address = "mysql+pymysql://{0}:{1}@127.0.0.1:3306/{2}".format(id, pw, db_name)
+db_address = os.getenv("SQLALCHEMY_DATABASE_URI")
 db_connection = create_engine(db_address)
 conn = db_connection.connect()
 
@@ -56,11 +53,13 @@ def get_analysis_result():
 
         ret["pre-covid"] = {}
         ret["post-covid"] = {}
+        ret["description"] = ""
 
-        pre_max_data = 0
-        post_max_data = 0
+        pre_ranking = []
+        post_ranking = []
 
         if region:
+            # 코로나 이전
             try:
                 x_series = pre_df.iloc[:, 0]
                 y_series = pre_df[region]
@@ -72,10 +71,13 @@ def get_analysis_result():
 
             for idx, value in enumerate(x_axis):
                 ret["pre-covid"][value] = y_axis[idx]
-                if pre_max_data < y_axis[idx]:
-                    pre_max_cat = value
-                    pre_max_data = y_axis[idx]
+                pre_ranking.append((y_axis[idx], value))
 
+            pre_ranking.sort()
+            ret["description"] += make_desc(True, True, True, region, pre_ranking)
+            ret["description"] += make_desc(True, False, True, region, pre_ranking)
+
+            # 코로나 이후
             try:
                 x_series = post_df.iloc[:, 0]
                 y_series = post_df[region]
@@ -87,12 +89,11 @@ def get_analysis_result():
 
             for idx, value in enumerate(x_axis):
                 ret["post-covid"][value] = y_axis[idx]
-                if post_max_data < y_axis[idx]:
-                    post_max_cat = value
-                    post_max_data = y_axis[idx]
+                post_ranking.append((y_axis[idx], value))
 
-            ret["description"] = "코로나 이전 \'{0}\' 지역에서 가장 많이 폐업한 업종은 \'{1}\'입니다. {2} (폐업 점포 수 / 지역 인구수). 코로나 이후 \'{0}\' 지역에서 가장 많이 폐업한 업종은 \'{3}\'입니다. {4} (폐업 점포 수 / 지역 인구수).".format(
-                region, pre_max_cat, round(pre_max_data, 2), post_max_cat, round(post_max_data, 2))
+            post_ranking.sort()
+            ret["description"] += make_desc(False, True, True, region, post_ranking)
+            ret["description"] += make_desc(False, False, True, region, post_ranking)
 
         elif category:
             pre_df = pre_df.set_index("Unnamed: 0").transpose().reset_index()
@@ -109,9 +110,11 @@ def get_analysis_result():
 
             for idx, value in enumerate(x_axis):
                 ret["pre-covid"][value] = y_axis[idx]
-                if pre_max_data < y_axis[idx]:
-                    pre_max_cat = value
-                    pre_max_data = y_axis[idx]
+                pre_ranking.append((y_axis[idx], value))
+
+            pre_ranking.sort()
+            ret["description"] += make_desc(True, True, False, category, pre_ranking)
+            ret["description"] += make_desc(True, False, False, category, pre_ranking)
 
             try:
                 x_series = post_df.iloc[:, 0]
@@ -124,15 +127,41 @@ def get_analysis_result():
 
             for idx, value in enumerate(x_axis):
                 ret["post-covid"][value] = y_axis[idx]
-                if post_max_data < y_axis[idx]:
-                    post_max_cat = value
-                    post_max_data = y_axis[idx]
-            
-            ret["description"] = "코로나 이전 \'{0}\' 업종에서 가장 많이 폐업한 지역은 \'{1}\'입니다. {2} (폐업 점포 수 / 지역 인구수). 코로나 이후 \'{0}\' 업종에서 가장 많이 폐업한 지역은 \'{3}\'입니다. {4} (폐업 점포 수 / 지역 인구수).".format(
-                category, pre_max_cat, round(pre_max_data, 2), post_max_cat, round(post_max_data, 2))
+                post_ranking.append((y_axis[idx], value))
+
+            post_ranking.sort()
+            ret["description"] += make_desc(False, True, False, category, post_ranking)
+            ret["description"] += make_desc(False, False, False, category, post_ranking)
 
         else:
             return abort(400, "INVALID_DATA")
 
     pprint(ret)
     return jsonify(ret), 200
+
+def make_desc(pre, max, region, user_input, ranking):
+    if pre:
+        period = "이전"
+    else:
+        period = "이후"
+    
+    if max:
+        asc = "많이"
+        ranks = [-1, -2, -3]
+    else:
+        asc = "적게"
+        ranks = [0, 1, 2]
+    
+    if region:
+        desc_format = "코로나 {0} \'{1}\' 지역에서 가장 {2} 폐업한 업종 TOP 3입니다. (기준: 폐업 점포 수 / 해당 업종 점포 수 * 100)\n"
+    else:
+        desc_format = "코로나 {0} \'{1}\' 업종에서 가장 {2} 폐업한 지역 TOP 3입니다. (기준: 폐업 점포 수 / 해당 지역 인구 수 * 100)\n"
+    ranking_format = "{0}위 - {1} ({2})\n"
+    
+    description = ""
+    description += desc_format.format(period, user_input, asc)
+    for idx, rank in enumerate(ranks):
+        y_val, x_val = ranking[rank]
+        description += ranking_format.format(idx + 1, x_val, round(y_val, 2))
+    
+    return description

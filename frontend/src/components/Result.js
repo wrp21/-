@@ -7,11 +7,10 @@ import {Footer,MainContainer,Section} from '../Styled/Styled';
 import { BarChart } from './BarChart';
 
 
-
-
 // 스타일 관련
 import '../Styled/result.css';
 import { LineChart } from './LineChart';
+import styled from 'styled-components';
 
 import Chart from 'chart.js/auto';
 
@@ -169,7 +168,8 @@ const Result = ({history})=>{
     */
     
     return(
-        <div>
+        <RelativeFrame>
+        <MainFrame>
             
             <div id="MainContainer">
                 <div id="MainContainerHead">
@@ -208,10 +208,6 @@ const Result = ({history})=>{
                         <LineChart data={[closeDate,closeCount]}></LineChart>
                     </div>
                 }
-
-
-    
-
                 
                 <div id="BottomContainer">
                     <div id="ButtonContainer">
@@ -237,10 +233,21 @@ const Result = ({history})=>{
                 
 
             </div>
-        </div>
-            
+        </MainFrame>
+        </RelativeFrame>
     );
-    
 }
+
+const RelativeFrame = styled.div`
+    position: relative;
+`;
+
+const MainFrame = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: cyan;
+    width: 100%;
+`;
 
 export default Result;

@@ -31,7 +31,8 @@ def add_to_db():
         name='post_closed_count', con=db_connection, if_exists='replace', index=False)
 
     # 지역구별 개업중인 점포 수 데이터를 opening_group 테이블에 추가
-    opening_group = pd.read_csv(
+    
+    cat_closed_per_shop_count = pd.read_csv(
         '../dataAnalysis/csvdata/opening_normalized.csv', encoding='cp949')
     opening_group.to_sql(name='opening_group',
                          con=db_connection, if_exists='replace', index=False)
