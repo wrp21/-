@@ -53,42 +53,61 @@ const Result = ({history})=>{
     let regionCovid;
     let categoryCovid;
 
+    
+
     const [regionListData, setRegionListData] = useState([]);
     const [categoryListData, setCategoryListData] = useState([]);
 
-    const getData = async()=>{
-
-        const response = await axios.all([
-            await axios({
+    //추천 지역 보러가기
+    const getRegionData = async()=>{
+        await axios({
                 method: 'get',                                 
                 url: 'http://172.30.1.35:5000/api/result',    
                 params: {category:userSelect[0]},
                 headers: {'Content-Type': 'application/json'},
-            }),
-            await axios({
+            })
+            .then((response) => {
+                console.log(response);
+                console.log('지역 데이터',response.data);
+
+                const postRegionCovid = response.data['post-covid'];
+                const preRegionCovid = response.data['pre-covid'];
+
+                setRegionListData([Object.keys(postRegionCovid),Object.values(preRegionCovid),Object.values(postRegionCovid)]);
+
+                toggleDiv2();
+
+                
+           
+            })
+            .catch((response) => {       
+                alert("error");
+            })
+    };
+
+    // 추천 업종 보러가기
+    const getCategoryData = async()=>{
+        await axios({
                 method: 'get',                                 
                 url: 'http://172.30.1.35:5000/api/result',    
                 params: {region:userSelect[1]},
                 headers: {'Content-Type': 'application/json'},
             })
-        ]);
+            .then((response) => {
+                console.log(response);
+                console.log('업종 데이터',response.data);
 
-        console.log('response',response);
-        console.log('response.data0',response[0].data);
-        console.log('response.data1',response[1].data);
+                const postCategoryCovid = response.data['post-covid'];
+                const preCategoryCovid = response.data['pre-covid'];
 
-        regionCovid = response[0].data;
-        categoryCovid = response[1].data;
+                setCategoryListData([Object.keys(postCategoryCovid),Object.values(preCategoryCovid),Object.values(postCategoryCovid)]);
 
-
-        console.log('regionCovid',regionCovid);
-        console.log('categoryCovid',categoryCovid);
-
-        setRegionListData([Object.keys(regionCovid['pre-covid']),Object.values(regionCovid['pre-covid']),Object.values(regionCovid['post-covid'])]);
-
-        setCategoryListData([Object.keys(categoryCovid['pre-covid']),Object.values(categoryCovid['pre-covid']),Object.values(categoryCovid['post-covid'])]);
-
-
+                toggleDiv1();
+           
+            })
+            .catch((response) => {       
+                alert("error");
+            })
     };
    
     //userSelect[0]:업종
@@ -113,11 +132,9 @@ const Result = ({history})=>{
     }
     // 둘다 선택했을 경우
     else{
- 
+
         closeDate = Object.keys(data);
         closeCount = Object.values(data);
-
-        getData();
 
     }
     
@@ -141,7 +158,7 @@ const Result = ({history})=>{
 
     //지역추천 버튼 눌렀을 때
     const toggleDiv2=()=>{
-        
+
         const regionDiv = document.getElementById('region');
         const categoryDiv = document.getElementById('category');
         
@@ -162,8 +179,7 @@ const Result = ({history})=>{
        document.documentElement.scrollTop = document.body.scrollHeight;
         
     }
-
-    
+   
     return(
         <div>
             
@@ -217,8 +233,8 @@ const Result = ({history})=>{
                 
                 <div id="ButtonContainer">
 
-                    <Button onClick={toggleDiv1} style={{ marginLeft:"100px",           marginRight:"30px", backgroundColor:'rgb(75,192,  192)'}}  disabled={(userSelect[0]==='' || userSelect[0] ==='미정')}>추천업종 보러가기</Button>
-                    <Button onClick={toggleDiv2} style={{marginRight:"30px",backgroundColor:'rgb(75,192,192)'}} disabled={(userSelect[1]==='' || userSelect[1] ==='미정')}>추천지역 보러가기</Button>
+                    <Button onClick={getRegionData} style={{ marginLeft:"100px",           marginRight:"30px", backgroundColor:'rgb(75,192,  192)'}}  disabled={(userSelect[0]==='' || userSelect[0] ==='미정')}>추천업종 보러가기</Button>
+                    <Button onClick={getCategoryData} style={{marginRight:"30px",backgroundColor:'rgb(75,192,192)'}} disabled={(userSelect[1]==='' || userSelect[1] ==='미정')}>추천지역 보러가기</Button>
 
                 </div>
                     

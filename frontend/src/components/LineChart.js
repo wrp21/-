@@ -32,7 +32,7 @@ export const LineChart = (props)=>{
         labels:list.data[0],
         datasets:[
             {
-                label:'페업건수',
+                label:'페업건수 추이',
                 borderWidth:3,
                 data:list.data[1],
                 backgroundColor:'rgb(75,192,192)',
