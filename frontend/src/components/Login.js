@@ -18,9 +18,7 @@ const Login = ({history}) => {
     }
 
     const onClickLogin = async() =>{
-        console.log('click login');
-        console.log('ID:',id);
-        console.log("PW",password);
+
 
         try{
             const user = await fetchLogin({id,password});

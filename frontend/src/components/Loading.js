@@ -1,5 +1,5 @@
 import React from "react";
-import { FormContainer, LoadingMsg} from "../Styled/Styled";
+import { FormContainer } from "../Styled/Styled";
 
 
 const Loading = ({history}) => {

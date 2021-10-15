@@ -4,14 +4,11 @@ import styled from 'styled-components';
 ////// App.js : 상단 내비게이션 헤더 디자인 BEGIN //////////////
 
 export const StyledSpace = styled.div`
-    /* background-color:black; */
     height:60px;
 `;
 export const StyledAppDiv = styled.div`
-
     box-sizing:0;
     margin:0;
-    /* font-family:"consolas"; */
 `;
 
 export const StyledAppRouterDomLink = styled(NavLink)`
@@ -21,13 +18,11 @@ export const StyledAppRouterDomLink = styled(NavLink)`
 `;
 
 export const StyledAppHeader = styled.header`
-    /* background-color:#333; */
     background-color:#2C2C32;
     height:50px;
     position:fixed;
     top:0;
     box-shadow: 0px 3px 3px 0px rgb(0 0 0 / 33%);
-    /* transition: top 0.1s ease-in-out; */
     width: 100%;
     z-index:1;
 `;
@@ -36,7 +31,6 @@ export const StyledAppNav = styled.nav`
     display:flex;
     justify-content:space-between;
     align-items:center;
-
     top:0;
     padding: 8px 12px;
     height: 55px;
@@ -62,7 +56,6 @@ export const StyledAppNavMenuUl = styled.ul`
 
 export const StyledAppNavMenuLi = styled.li`
     padding: 8px 12px;
-    /* background-color:#333; */
     background-color:#2C2C32;
 
     &:hover {
@@ -72,9 +65,7 @@ export const StyledAppNavMenuLi = styled.li`
 `;
 
 export const StyledAppNavToggleBtn = styled.a`
-    
     display: none;
-    /* position: fixed; */
     position: absolute;
     right: 32px;
     font-size: 24px;
@@ -99,26 +90,6 @@ export const StyledLayoutMain = styled.div`
     
 `;
 
-
-export const StyledLayoutRegister = styled.div`
-    background-color:lightgreen;
-    height:1000px;
-`;
-
-export const StyledLayoutLoading = styled.div`
-    background-color:khaki;
-    height:1000px;
-`;
-
-export const StyledLayoutResult = styled.div`
-    background-color:lightpink;
-    height:1000px;
-`;
-
-export const StyledLayoutFooter = styled.div`
-    background-color:lightsalmon;
-    height:1000px;
-`;
 
 ////// App.js : 메인페이지 영역 구별 //////////////
 
@@ -159,31 +130,21 @@ export const StyledFooter = styled.footer`
 
 ////// Main.js : 소개 페이지 디자인 BEGIN //////////////
 export const StyledMainDiv = styled.div`
-    /* display: flex;
-    justify-content: center;
-    align-items:center; */
 
     display:flex;
     text-align:center;
     align-items:center;
     justify-content:center;
     background-color:#2C2C32;
-    /* background-color:blueviolet; */
-    /* background-color:#675ce9; */
-    /* background-color:black; */
+
     height:80vh;
-    /* width:auto;
-    height:auto; */
-    
-    /* height:50px; */
+
 `;
 
 export const StyledIntroNav = styled.div`
     display:flex;
-    /* background-color:lightcoral; */
     align-items:center;
     justify-content:center;
-
     height:20vh;
 `;
 
@@ -194,15 +155,7 @@ export const StyledIntroDiv = styled.a`
     color:#444;
 
     &:hover {
-        /* background-color:khaki;    */
-        /* background-color:#f4f4f4; */
-        /* background-color: #008CBA;  Blue */
-        /* background-color: #f44336;  Red */ 
-        /* background-color: #e7e7e7;  Gray  
-        background-color: #555555; Black   */
-
         background-color:#f44336; 
-        
         color:beige;
     }
 `;
@@ -220,10 +173,7 @@ export const StyledIntroMenuCategory = styled.div`
 
     &:hover {
         background-color: #f44336;
-        /* background-color: green; */
-        /* background-color:orange; */
         color:azure;
-        
         transition : 0.5s;
     }
 `;
@@ -251,32 +201,27 @@ export const StyledIntroMenuBoth = styled.div`
     background-color:#F5F5F5;
     height:50vh;
     box-shadow: 0px 3px 3px 3px rgb(0 0 0 / 33%);
-    
 
     &:hover {
         background-color: green;
         color:azure;
-        
         transition : 0.5s;
     }
 `;
 
 export const Styledblank = styled.div`
-    /* width:auto; */
     align-items:center;
     height:60px;
 `;
 
 export const StyledInlineDiv = styled.div`
-    /* position:relative; */
     display:inline-block;
     justify-content:center;
     text-align:left;
     align-items:center;
     padding: 20px;
     margin-left:10px;
-    
-    /* left:100%; */
+
 `;
 
 export const StyledTitleMent = styled.div`
@@ -287,10 +232,7 @@ export const StyledTitleMent = styled.div`
 
 export const StyledMent = styled.div`
     display:flex;
-    /* width:1000px;
-    height:1000px; */
     color:azure;
-    /* background-color:greenyellow; */
     text-align:center;
 `;
 
@@ -317,12 +259,6 @@ export const StyledWrapDiv = styled.div`
 
 
 export const FormContainer = styled.div`
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%; */
-
     display:flex;
     text-align:center;
     align-items:center;
@@ -332,7 +268,6 @@ export const FormContainer = styled.div`
 
     color:azure;
 
-    /* margin-top:100px; */
     padding:20px;
 
 
@@ -380,7 +315,6 @@ export const NaviContainer = styled.nav`
 export const MainContainer = styled.article`
     width: 80%;
     margin: 0 auto;
-
     border: solid #eaeaea 1px;
     
 `;
@@ -403,7 +337,6 @@ export const Section = styled.section`
     width: 100%;
     height:80vh;
     padding: 10px 20px 20px 20px;
-
     background-color: lightgray;
 `;
 

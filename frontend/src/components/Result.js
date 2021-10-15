@@ -20,11 +20,8 @@ const Result = ({ history }) => {
   const data = location.state.responseResultData;
 
   const userSelect = location.state.userSelect;
-  console.log("데이터 확인", data["data"]);
-  //console.log("코로나 이후 데이터",data['post-covid']);
-  //console.log("코로나 이전 데이터",data['pre-covid']);
 
-  console.log("지역/업종", userSelect);
+
   ///////////////////////////////////////////////////////////////////////////
 
   // 지역-업종 둘다 선택했을 때
@@ -52,8 +49,6 @@ const Result = ({ history }) => {
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
-        console.log(response);
-        console.log("지역 데이터", response.data);
 
         const postRegionCovid = response.data["post-covid"];
         const preRegionCovid = response.data["pre-covid"];
@@ -80,9 +75,6 @@ const Result = ({ history }) => {
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
-        console.log(response);
-        console.log("업종 데이터", response.data);
-
         const postCategoryCovid = response.data["post-covid"];
         const preCategoryCovid = response.data["pre-covid"];
 
