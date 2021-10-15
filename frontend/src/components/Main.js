@@ -215,12 +215,12 @@ const Main = ({history}) => {
             </StyledIntroDiv>
         </Link>
             
+
         </StyledIntroNav>
 
         <Bounce right duration={2000} delay={100} >
         <StyledIntroMenuCategory id="intro-category">
             <StyledWrapDiv>
-                
 
                 <StyledInlineDivImg>
                     <Line 
@@ -248,6 +248,7 @@ const Main = ({history}) => {
                     </StyledInlineDiv>
                 </Fade>
             </StyledWrapDiv>
+
         </StyledIntroMenuCategory>
         </Bounce>
         
@@ -325,7 +326,6 @@ const Main = ({history}) => {
         </StyledFlexDiv>
         </>
         
-
     );
 
 }

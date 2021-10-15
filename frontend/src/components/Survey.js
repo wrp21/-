@@ -104,17 +104,18 @@ const Survey = ({history, location}) => {
                 paramValue = {region: tempRegionValue, category: tempCategoryValue}
             }
 
+
             console.log(paramValue)
-        
 
             await axios({
-                method: 'get',                                 // 수정 필요 => 'get'
-                url: 'http://172.18.84.110:5000/api/result',    // 수정 필요
+                method: 'get',                                 
+                url: 'http://192.168.0.10:5000/api/result',    
                 params: paramValue,
                 headers: {'Content-Type': 'application/json'},
             })
             .then((response) => {
                 console.log(response);
+
                 console.log(response.data);
                 history.push({
                     pathname: "/Result",
@@ -127,6 +128,7 @@ const Survey = ({history, location}) => {
                 alert("pass");
             })
             .catch((response) => {
+
                 console.log(response);
                 history.push("/Survey");
                 alert("error");
