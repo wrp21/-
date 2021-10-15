@@ -48,6 +48,9 @@ def get_analysis_result():
 
     # 하나만 입력한 경우
     else:
+        pre_df = pd.read_sql_table('pre_closed_count', conn)
+        post_df = pd.read_sql_table('post_closed_count', conn)
+
         ret["pre-covid"] = {}
         ret["post-covid"] = {}
         ret["description"] = ""
@@ -56,13 +59,6 @@ def get_analysis_result():
         post_ranking = []
 
         if region:
-            pre_df = pd.read_sql_table('pre_cat_recommendation', conn)
-            post_df = pd.read_sql_table('post_cat_recommendation', conn)
-
-            pre_df = pre_df.set_index("Unnamed: 0").transpose().reset_index()
-            post_df = post_df.set_index("Unnamed: 0").transpose().reset_index()
-
-            pprint(pre_df.head())
             # 코로나 이전
             try:
                 x_series = pre_df.iloc[:, 0]
@@ -100,13 +96,8 @@ def get_analysis_result():
             ret["description"] += make_desc(False, False, True, region, post_ranking)
 
         elif category:
-            pre_df = pd.read_sql_table('pre_closed_count', conn)
-            post_df = pd.read_sql_table('post_closed_count', conn)
-
             pre_df = pre_df.set_index("Unnamed: 0").transpose().reset_index()
             post_df = post_df.set_index("Unnamed: 0").transpose().reset_index()
-
-            pprint(pre_df.head())
 
             try:
                 x_series = pre_df.iloc[:, 0]
@@ -144,8 +135,6 @@ def get_analysis_result():
 
         else:
             return abort(400, "INVALID_DATA")
-
-    pprint(ret)
     return jsonify(ret), 200
 
 def make_desc(pre, max, region, user_input, ranking):
@@ -162,9 +151,9 @@ def make_desc(pre, max, region, user_input, ranking):
         ranks = [0, 1, 2]
     
     if region:
-        desc_format = "코로나 {0} \'{1}\' 지역에서 가장 {2} 폐업한 업종 TOP 3입니다. (기준: 폐업 점포 수 / 해당 업종 점포 수 * 100)\n"
+        desc_format = "코로나 {0} \'{1}\' 지역에서 가장 {2} 폐업한 업종 TOP 3입니다. (기준: 폐업 점포 수 / 해당 지역 인구 수 * 100)\n"
     else:
-        desc_format = "코로나 {0} \'{1}\' 업종에서 가장 {2} 폐업한 지역 TOP 3입니다. (기준: 폐업 점포 수 / 해당 지역 인구 수 * 100)\n"
+        desc_format = "코로나 {0} \'{1}\' 업종에서 가장 {2} 폐업한 지역 TOP 3입니다. (기준: 폐업 점포 수 / 해당 지역 인구 수 * 10000)\n"
     ranking_format = "{0}위 - {1} ({2})\n"
     
     description = ""
