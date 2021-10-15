@@ -55,17 +55,17 @@ const Result = ({history})=>{
     const [categoryListData, setCategoryListData] = useState([]);
 
     const getData = async()=>{
-
+        console.log("axios parmas ... ", {"category":userSelect[0]}, {"region":userSelect[1]})
         const response = await axios.all([
             await axios({
                 method: 'get',                                 
-                url: 'http://172.30.1.35:5000/api/result',    
+                url: 'http://192.168.0.26:5000/api/result',    
                 params: {category:userSelect[0]},
                 headers: {'Content-Type': 'application/json'},
             }),
             await axios({
                 method: 'get',                                 
-                url: 'http://172.30.1.35:5000/api/result',    
+                url: 'http://192.168.0.26:5000/api/result',    
                 params: {region:userSelect[1]},
                 headers: {'Content-Type': 'application/json'},
             })

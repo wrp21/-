@@ -114,9 +114,7 @@ const Survey = ({history, location}) => {
                 headers: {'Content-Type': 'application/json'},
             })
             .then((response) => {
-                console.log(response);
-
-                console.log(response.data);
+                console.log("response in survey ...", response);
                 history.push({
                     pathname: "/Result",
                     state: {
